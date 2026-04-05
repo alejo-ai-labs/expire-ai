@@ -167,7 +167,7 @@ export default function ScanScreen() {
     // Render processing state
     if (scanState === 'processing') {
         return (
-            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.canvas }]} edges={['bottom']}>
                 <LoadingSpinner message="Processing receipt..." />
                 <Text style={[styles.processingSubtext, { color: colors.textMuted }]}>
                     Our AI is extracting food items from your receipt
@@ -179,7 +179,7 @@ export default function ScanScreen() {
     // Render error state
     if (scanState === 'error') {
         return (
-            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.canvas }]} edges={['bottom']}>
                 <View style={styles.errorContainer}>
                     <Ionicons name="alert-circle-outline" size={64} color={colors.statusRedText} />
                     <Text style={[styles.errorTitle, { color: colors.primaryInk }]}>Scan Failed</Text>
@@ -195,7 +195,7 @@ export default function ScanScreen() {
 
     // Render confirmation view
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.canvas }]} edges={['bottom']}>
             <ScrollView style={styles.confirmContainer}>
                 <Text style={[styles.confirmTitle, { color: colors.primaryInk }]}>Confirm Items</Text>
                 <Text style={[styles.confirmSubtitle, { color: colors.textMuted }]}>

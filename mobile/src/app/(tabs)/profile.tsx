@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ProfileBox } from '../../components/ProfileBox';
 import { SettingsBox } from '../../components/SettingsBox';
 import { HelpBox } from '../../components/HelpBox';
@@ -19,20 +20,25 @@ export default function ProfileScreen() {
   };
 
   return (
-    <ScrollView
-      style={[styles.scroll, { backgroundColor: colors.canvas }]}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
-      <ProfileBox profile={profile} onUpdateField={handleUpdateField} />
-      <SettingsBox isDarkMode={mode === 'dark'} onToggleTheme={toggle} />
-      <HelpBox />
-      <AboutSection />
-    </ScrollView>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.canvas }]} edges={['bottom']}>
+      <ScrollView
+        style={[styles.scroll, { backgroundColor: colors.canvas }]}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <ProfileBox profile={profile} onUpdateField={handleUpdateField} />
+        <SettingsBox isDarkMode={mode === 'dark'} onToggleTheme={toggle} />
+        <HelpBox />
+        <AboutSection />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   scroll: {
     flex: 1,
   },

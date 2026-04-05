@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useThemeColors } from '../context/ThemeContext';
 import { expiria } from '../theme';
 
@@ -22,9 +23,16 @@ export function SettingsBox({ isDarkMode, onToggleTheme }: SettingsBoxProps) {
         Settings
       </Text>
       <View style={styles.row}>
-        <Text style={[styles.label, { color: colors.primaryInk }]}>
-          Dark Mode
-        </Text>
+        <View style={styles.labelRow}>
+          <Ionicons
+            name={isDarkMode ? 'moon' : 'sunny'}
+            size={18}
+            color={isDarkMode ? colors.accent : colors.accent}
+          />
+          <Text style={[styles.label, { color: colors.primaryInk }]}>
+            Dark Mode
+          </Text>
+        </View>
         <Switch
           value={isDarkMode}
           onValueChange={onToggleTheme}
@@ -50,6 +58,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  labelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: expiria.spacing.sm,
   },
   label: {
     fontSize: expiria.typography.sizes.body,
