@@ -6,6 +6,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { useNetworkStatus } from '../hooks/useNetworkStatus';
+import { expiria } from '../theme';
 
 interface OfflineIndicatorProps {
     /** Custom message to display */
@@ -67,9 +68,9 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#f59e0b',
-        paddingVertical: 8,
-        paddingHorizontal: 16,
+        backgroundColor: expiria.colors.accent,
+        paddingVertical: expiria.spacing.sm,
+        paddingHorizontal: expiria.spacing.md,
         zIndex: 1000,
     },
     content: {
@@ -81,18 +82,18 @@ const styles = StyleSheet.create({
         width: 8,
         height: 8,
         borderRadius: 4,
-        backgroundColor: '#fff',
-        marginRight: 8,
+        backgroundColor: expiria.colors.canvas,
+        marginRight: expiria.spacing.sm,
     },
     text: {
-        color: '#fff',
+        color: expiria.colors.canvas,
         fontSize: 14,
         fontWeight: '600',
     },
     pendingText: {
-        color: '#fff',
+        color: expiria.colors.canvas,
         fontSize: 12,
-        marginLeft: 8,
+        marginLeft: expiria.spacing.sm,
         opacity: 0.9,
     },
 });

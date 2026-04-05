@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, RefreshControl, View } from 'react-native';
 import { FoodItemWithStatus } from '../types';
 import { FoodCard } from './FoodCard';
 import { EmptyState } from './EmptyState';
+import { expiria } from '../theme';
 
 interface FoodCardListProps {
     items: FoodItemWithStatus[];
@@ -78,8 +79,8 @@ export function FoodCardList({
                         <RefreshControl
                             refreshing={refreshing}
                             onRefresh={onRefresh}
-                            tintColor="#3b82f6"
-                            colors={['#3b82f6']}
+                            tintColor={expiria.colors.primaryInk}
+                            colors={[expiria.colors.primaryInk]}
                         />
                     ) : undefined
                 }
@@ -92,10 +93,10 @@ export function FoodCardList({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9fafb',
+        backgroundColor: expiria.colors.primarySurface,
     },
     listContent: {
-        paddingVertical: 8,
+        paddingVertical: expiria.spacing.sm,
     },
     emptyListContent: {
         flexGrow: 1,

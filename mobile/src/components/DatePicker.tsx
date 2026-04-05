@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { toISODateString } from '../utils/dateUtils';
+import { expiria } from '../theme';
 
 interface DatePickerProps {
     value: Date;
@@ -49,6 +50,7 @@ export function DatePicker({
     maxDate = getDefaultMaxDate(),
     label,
 }: DatePickerProps) {
+
     const [modalVisible, setModalVisible] = useState(false);
     const [inputMode, setInputMode] = useState<InputMode>('calendar');
     const [viewDate, setViewDate] = useState(new Date(value));
@@ -172,13 +174,13 @@ export function DatePicker({
             <View style={styles.calendar}>
                 <View style={styles.calendarHeader}>
                     <TouchableOpacity onPress={() => navigateMonth('prev')} style={styles.navButton}>
-                        <Ionicons name="chevron-back" size={24} color="#374151" />
+                        <Ionicons name="chevron-back" size={24} color={expiria.colors.primaryInk} />
                     </TouchableOpacity>
                     <Text style={styles.monthYearText}>
                         {MONTHS[month]} {year}
                     </Text>
                     <TouchableOpacity onPress={() => navigateMonth('next')} style={styles.navButton}>
-                        <Ionicons name="chevron-forward" size={24} color="#374151" />
+                        <Ionicons name="chevron-forward" size={24} color={expiria.colors.primaryInk} />
                     </TouchableOpacity>
                 </View>
 
@@ -231,7 +233,7 @@ export function DatePicker({
                     setInputError(null);
                 }}
                 placeholder="2025-12-31"
-                placeholderTextColor="#9ca3af"
+                placeholderTextColor={expiria.colors.textMuted}
                 keyboardType="numbers-and-punctuation"
                 autoCapitalize="none"
             />
@@ -246,9 +248,9 @@ export function DatePicker({
         <View style={styles.container}>
             {label && <Text style={styles.label}>{label}</Text>}
             <TouchableOpacity style={styles.inputButton} onPress={openModal}>
-                <Ionicons name="calendar-outline" size={20} color="#6b7280" />
+                <Ionicons name="calendar-outline" size={20} color={expiria.colors.textMuted} />
                 <Text style={styles.inputText}>{formatDisplayDate(value)}</Text>
-                <Ionicons name="chevron-down" size={20} color="#6b7280" />
+                <Ionicons name="chevron-down" size={20} color={expiria.colors.textMuted} />
             </TouchableOpacity>
 
             <Modal
@@ -262,7 +264,7 @@ export function DatePicker({
                         <View style={styles.modalHeader}>
                             <Text style={styles.modalTitle}>Select Date</Text>
                             <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
-                                <Ionicons name="close" size={24} color="#374151" />
+                                <Ionicons name="close" size={24} color={expiria.colors.primaryInk} />
                             </TouchableOpacity>
                         </View>
 
@@ -274,7 +276,7 @@ export function DatePicker({
                                 <Ionicons
                                     name="calendar"
                                     size={18}
-                                    color={inputMode === 'calendar' ? '#ffffff' : '#6b7280'}
+                                    color={inputMode === 'calendar' ? expiria.colors.canvas : expiria.colors.textMuted}
                                 />
                                 <Text style={[styles.modeButtonText, inputMode === 'calendar' && styles.modeButtonTextActive]}>
                                     Calendar
@@ -287,7 +289,7 @@ export function DatePicker({
                                 <Ionicons
                                     name="create"
                                     size={18}
-                                    color={inputMode === 'manual' ? '#ffffff' : '#6b7280'}
+                                    color={inputMode === 'manual' ? expiria.colors.canvas : expiria.colors.textMuted}
                                 />
                                 <Text style={[styles.modeButtonText, inputMode === 'manual' && styles.modeButtonTextActive]}>
                                     Manual
@@ -308,40 +310,40 @@ export function DatePicker({
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 16,
+        marginBottom: expiria.spacing.md,
     },
     label: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#374151',
-        marginBottom: 8,
+        fontSize: expiria.typography.sizes.caption + 1,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.primaryInk,
+        marginBottom: expiria.spacing.sm,
     },
     inputButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderWidth: 1,
-        borderColor: '#d1d5db',
-        borderRadius: 8,
-        paddingHorizontal: 12,
-        paddingVertical: 12,
-        gap: 8,
+        backgroundColor: expiria.colors.secondarySurface,
+        borderWidth: expiria.strokes.thin,
+        borderColor: expiria.colors.border,
+        borderRadius: expiria.borderRadius.sm,
+        paddingHorizontal: expiria.spacing.sm + 4,
+        paddingVertical: expiria.spacing.sm + 4,
+        gap: expiria.spacing.sm,
     },
     inputText: {
         flex: 1,
-        fontSize: 16,
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.body,
+        color: expiria.colors.primaryInk,
     },
     modalOverlay: {
         flex: 1,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        padding: expiria.spacing.lg - 4,
     },
     modalContent: {
-        backgroundColor: '#ffffff',
-        borderRadius: 16,
+        backgroundColor: expiria.colors.secondarySurface,
+        borderRadius: expiria.borderRadius.md,
         width: '100%',
         maxWidth: 360,
         maxHeight: '80%',
@@ -350,48 +352,48 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: '#e5e7eb',
+        paddingHorizontal: expiria.spacing.md,
+        paddingVertical: expiria.spacing.sm + 4,
+        borderBottomWidth: expiria.strokes.thin,
+        borderBottomColor: expiria.colors.border,
     },
     modalTitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.subheading - 2,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
     },
     closeButton: {
-        padding: 4,
+        padding: expiria.spacing.xs,
     },
     modeToggle: {
         flexDirection: 'row',
-        padding: 12,
-        gap: 8,
+        padding: expiria.spacing.sm + 4,
+        gap: expiria.spacing.sm,
     },
     modeButton: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 10,
-        paddingHorizontal: 12,
-        borderRadius: 8,
-        backgroundColor: '#f3f4f6',
-        gap: 6,
+        paddingVertical: expiria.spacing.sm + 2,
+        paddingHorizontal: expiria.spacing.sm + 4,
+        borderRadius: expiria.borderRadius.sm,
+        backgroundColor: expiria.colors.canvas,
+        gap: expiria.spacing.xs + 2,
     },
     modeButtonActive: {
-        backgroundColor: '#3b82f6',
+        backgroundColor: expiria.colors.primaryInk,
     },
     modeButtonText: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.caption + 1,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.textMuted,
     },
     modeButtonTextActive: {
-        color: '#ffffff',
+        color: expiria.colors.canvas,
     },
     modalBody: {
-        padding: 16,
+        padding: expiria.spacing.md,
     },
     calendar: {
         width: '100%',
@@ -400,26 +402,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 16,
+        marginBottom: expiria.spacing.md,
     },
     navButton: {
-        padding: 8,
+        padding: expiria.spacing.sm,
     },
     monthYearText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
     },
     weekDaysRow: {
         flexDirection: 'row',
-        marginBottom: 8,
+        marginBottom: expiria.spacing.sm,
     },
     weekDayText: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 12,
-        fontWeight: '500',
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.small + 1,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.textMuted,
     },
     daysGrid: {
         flexDirection: 'row',
@@ -434,65 +436,65 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 8,
+        borderRadius: expiria.borderRadius.sm,
     },
     selectedDay: {
-        backgroundColor: '#3b82f6',
+        backgroundColor: expiria.colors.primaryInk,
     },
     todayDay: {
-        backgroundColor: '#e5e7eb',
+        backgroundColor: expiria.colors.border,
     },
     disabledDay: {
         opacity: 0.3,
     },
     dayText: {
-        fontSize: 14,
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.caption + 1,
+        color: expiria.colors.primaryInk,
     },
     selectedDayText: {
-        color: '#ffffff',
-        fontWeight: '600',
+        color: expiria.colors.canvas,
+        fontWeight: expiria.typography.weights.semibold,
     },
     disabledDayText: {
-        color: '#9ca3af',
+        color: expiria.colors.textMuted,
     },
     manualInputContainer: {
-        padding: 8,
+        padding: expiria.spacing.sm,
     },
     manualInputLabel: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#374151',
-        marginBottom: 8,
+        fontSize: expiria.typography.sizes.caption + 1,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.primaryInk,
+        marginBottom: expiria.spacing.sm,
     },
     manualInput: {
-        backgroundColor: '#f9fafb',
-        borderWidth: 1,
-        borderColor: '#d1d5db',
-        borderRadius: 8,
-        paddingHorizontal: 12,
-        paddingVertical: 12,
-        fontSize: 16,
-        color: '#1a1a1a',
+        backgroundColor: expiria.colors.canvas,
+        borderWidth: expiria.strokes.thin,
+        borderColor: expiria.colors.border,
+        borderRadius: expiria.borderRadius.sm,
+        paddingHorizontal: expiria.spacing.sm + 4,
+        paddingVertical: expiria.spacing.sm + 4,
+        fontSize: expiria.typography.sizes.body,
+        color: expiria.colors.primaryInk,
     },
     manualInputError: {
-        borderColor: '#ef4444',
+        borderColor: expiria.colors.statusRedText,
     },
     errorText: {
-        fontSize: 12,
-        color: '#ef4444',
-        marginTop: 4,
+        fontSize: expiria.typography.sizes.small + 1,
+        color: expiria.colors.statusRedText,
+        marginTop: expiria.spacing.xs,
     },
     submitButton: {
-        backgroundColor: '#3b82f6',
-        borderRadius: 8,
-        paddingVertical: 12,
+        backgroundColor: expiria.colors.primaryInk,
+        borderRadius: expiria.borderRadius.sm,
+        paddingVertical: expiria.spacing.sm + 4,
         alignItems: 'center',
-        marginTop: 16,
+        marginTop: expiria.spacing.md,
     },
     submitButtonText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#ffffff',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.canvas,
     },
 });

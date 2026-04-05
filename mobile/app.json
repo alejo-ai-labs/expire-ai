@@ -4,13 +4,13 @@
     "slug": "food-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "light",
     "scheme": "foodtracker",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/adaptive-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#A8BFA8"
     },
     "ios": {
       "supportsTablet": true,
@@ -19,12 +19,12 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#A8BFA8"
       },
       "package": "com.foodtracker.app"
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/adaptive-icon.png",
       "bundler": "metro"
     },
     "plugins": [
@@ -37,15 +37,15 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/icon.png",
-          "color": "#ffffff",
+          "icon": "./assets/adaptive-icon.png",
+          "color": "#A8BFA8",
           "sounds": []
         }
       ]
     ],
     "notification": {
-      "icon": "./assets/icon.png",
-      "color": "#3b82f6",
+      "icon": "./assets/adaptive-icon.png",
+      "color": "#A8BFA8",
       "androidMode": "default",
       "androidCollapsedTitle": "FoodTracker"
     }

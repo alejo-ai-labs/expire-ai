@@ -6,6 +6,7 @@ import { FoodCardList } from '../../components/FoodCardList';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { OfflineIndicator } from '../../components/OfflineIndicator';
 import { useFoodItems } from '../../hooks/useFoodItems';
+import { expiria } from '../../theme';
 
 export default function HomeScreen() {
     const router = useRouter();
@@ -76,7 +77,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9fafb',
+        backgroundColor: expiria.colors.primarySurface,
     },
     errorContainer: {
         flex: 1,
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     },
     errorText: {
         fontSize: 16,
-        color: '#ef4444',
+        color: expiria.colors.statusRedText,
         textAlign: 'center',
     },
 });

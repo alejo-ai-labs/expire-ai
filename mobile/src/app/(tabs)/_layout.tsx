@@ -1,39 +1,31 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-
-// Theme colors for consistent styling
-const theme = {
-    primary: '#3b82f6',
-    background: '#ffffff',
-    text: '#1a1a1a',
-    textMuted: '#6b7280',
-    border: '#e5e7eb',
-};
+import { expiria } from '../../theme';
 
 export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: theme.primary,
-                tabBarInactiveTintColor: theme.textMuted,
+                tabBarActiveTintColor: expiria.colors.primaryInk,
+                tabBarInactiveTintColor: expiria.colors.textMuted,
                 tabBarStyle: {
-                    backgroundColor: theme.background,
-                    borderTopColor: theme.border,
+                    backgroundColor: expiria.colors.primarySurface,
+                    borderTopColor: expiria.colors.border,
                     borderTopWidth: 1,
-                    paddingTop: 8,
-                    paddingBottom: 8,
+                    paddingTop: expiria.spacing.sm,
+                    paddingBottom: expiria.spacing.sm,
                 },
                 tabBarLabelStyle: {
-                    fontSize: 12,
-                    fontWeight: '500',
+                    fontSize: expiria.typography.sizes.small + 1,
+                    fontWeight: expiria.typography.weights.medium,
                 },
                 headerStyle: {
-                    backgroundColor: theme.background,
+                    backgroundColor: expiria.colors.primarySurface,
                 },
                 headerTitleStyle: {
-                    color: theme.text,
-                    fontWeight: '600',
-                    fontSize: 18,
+                    color: expiria.colors.primaryInk,
+                    fontWeight: expiria.typography.weights.semibold,
+                    fontSize: expiria.typography.sizes.subheading - 2,
                 },
                 headerShadowVisible: false,
             }}

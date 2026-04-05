@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { TrafficLightStatus } from '../types';
 import { formatDate } from '../utils/dateUtils';
 import { ExpirationBadge } from './ExpirationBadge';
+import { expiria } from '../theme';
 
 interface FoodCardProps {
     id: string;
@@ -42,7 +43,7 @@ export function FoodCard({
                         }}
                         hitSlop={8}
                     >
-                        <Ionicons name="trash-outline" size={20} color="#9ca3af" />
+                        <Ionicons name="trash-outline" size={20} color={expiria.colors.textMuted} />
                     </Pressable>
                 </View>
 
@@ -73,64 +74,60 @@ export function FoodCard({
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: '#ffffff',
-        borderRadius: 12,
-        marginHorizontal: 16,
-        marginVertical: 6,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3,
+        backgroundColor: expiria.colors.secondarySurface,
+        borderRadius: expiria.borderRadius.lg,
+        marginHorizontal: expiria.spacing.md,
+        marginVertical: expiria.spacing.xs + 2,
+        ...expiria.shadows.card,
     },
     content: {
-        padding: 16,
+        padding: expiria.spacing.md,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 12,
+        marginBottom: expiria.spacing.sm + 4,
     },
     name: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.subheading - 2,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
         flex: 1,
-        marginRight: 8,
+        marginRight: expiria.spacing.sm,
     },
     deleteButton: {
-        padding: 4,
+        padding: expiria.spacing.xs,
     },
     dates: {
-        marginBottom: 12,
+        marginBottom: expiria.spacing.sm + 4,
     },
     dateRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 4,
+        marginBottom: expiria.spacing.xs,
     },
     dateLabel: {
-        fontSize: 14,
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.caption + 1,
+        color: expiria.colors.textMuted,
         width: 80,
     },
     dateValue: {
-        fontSize: 14,
-        color: '#374151',
-        fontWeight: '500',
+        fontSize: expiria.typography.sizes.caption + 1,
+        color: expiria.colors.primaryInk,
+        fontWeight: expiria.typography.weights.medium,
     },
     estimatedBadge: {
-        backgroundColor: '#e5e7eb',
-        paddingHorizontal: 6,
+        backgroundColor: expiria.colors.border,
+        paddingHorizontal: expiria.spacing.xs + 2,
         paddingVertical: 2,
-        borderRadius: 4,
-        marginLeft: 8,
+        borderRadius: expiria.borderRadius.sm / 2,
+        marginLeft: expiria.spacing.sm,
     },
     estimatedText: {
-        fontSize: 11,
-        color: '#6b7280',
-        fontWeight: '500',
+        fontSize: expiria.typography.sizes.small,
+        color: expiria.colors.textMuted,
+        fontWeight: expiria.typography.weights.medium,
     },
     footer: {
         flexDirection: 'row',

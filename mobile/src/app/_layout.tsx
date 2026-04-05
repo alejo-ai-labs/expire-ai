@@ -1,48 +1,34 @@
-import { Stack } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
-import { useNotifications } from '../hooks/useNotifications';
-
-// Theme colors for consistent styling
-const theme = {
-    primary: '#3b82f6',
-    background: '#ffffff',
-    text: '#1a1a1a',
-};
+import { Stack } from 'expo-router'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { StatusBar } from 'expo-status-bar'
+import { TamaguiProvider } from 'tamagui'
+import { tamaguiConfig, expiria } from '../theme'
+import { useNotifications } from '../hooks/useNotifications'
 
 export default function RootLayout() {
-    // Initialize push notifications
-    useNotifications();
+  useNotifications()
 
-    return (
-        <SafeAreaProvider>
-            <StatusBar style="auto" />
-            <Stack
-                screenOptions={{
-                    headerStyle: {
-                        backgroundColor: theme.background,
-                    },
-                    headerTitleStyle: {
-                        color: theme.text,
-                        fontWeight: '600',
-                        fontSize: 18,
-                    },
-                    headerTintColor: theme.primary,
-                    headerShadowVisible: false,
-                    contentStyle: {
-                        backgroundColor: theme.background,
-                    },
-                }}
-            >
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen
-                    name="food/[id]"
-                    options={{
-                        title: 'Food Details',
-                        headerBackTitle: 'Back',
-                    }}
-                />
-            </Stack>
-        </SafeAreaProvider>
-    );
+  return (
+    <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
+      <SafeAreaProvider>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: expiria.colors.primarySurface },
+            headerTitleStyle: {
+              color: expiria.colors.primaryInk,
+              fontWeight: expiria.typography.weights.semibold,
+              fontSize: expiria.typography.sizes.subheading,
+            },
+            headerTintColor: expiria.colors.primaryInk,
+            headerShadowVisible: false,
+            contentStyle: { backgroundColor: expiria.colors.primarySurface },
+          }}
+        >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="food/[id]" options={{ title: 'Food Details', headerBackTitle: 'Back' }} />
+        </Stack>
+      </SafeAreaProvider>
+    </TamaguiProvider>
+  )
 }

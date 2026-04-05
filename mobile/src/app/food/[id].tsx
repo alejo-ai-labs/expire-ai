@@ -19,6 +19,7 @@ import { useFoodItems } from '../../hooks/useFoodItems';
 import { CameraError } from '../../hooks/useCamera';
 import { formatDate, calculateDaysUntilExpiration, getTrafficLightStatus } from '../../utils/dateUtils';
 import * as api from '../../services/api';
+import { expiria } from '../../theme';
 
 export default function FoodDetailScreen() {
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -161,7 +162,7 @@ export default function FoodDetailScreen() {
         return (
             <SafeAreaView style={styles.container} edges={['bottom']}>
                 <View style={styles.notFoundContainer}>
-                    <Ionicons name="alert-circle-outline" size={64} color="#9ca3af" />
+                    <Ionicons name="alert-circle-outline" size={64} color={expiria.colors.textMuted} />
                     <Text style={styles.notFoundTitle}>Item Not Found</Text>
                     <Text style={styles.notFoundText}>
                         This food item may have been deleted.
@@ -189,7 +190,7 @@ export default function FoodDetailScreen() {
                 {/* Info Cards */}
                 <View style={styles.infoSection}>
                     <View style={styles.infoCard}>
-                        <Ionicons name="cart-outline" size={24} color="#3b82f6" />
+                        <Ionicons name="cart-outline" size={24} color={expiria.colors.primaryInk} />
                         <View style={styles.infoContent}>
                             <Text style={styles.infoLabel}>Purchase Date</Text>
                             <Text style={styles.infoValue}>{formatDate(item.purchaseDate)}</Text>
@@ -197,7 +198,7 @@ export default function FoodDetailScreen() {
                     </View>
 
                     <View style={styles.infoCard}>
-                        <Ionicons name="calendar-outline" size={24} color="#3b82f6" />
+                        <Ionicons name="calendar-outline" size={24} color={expiria.colors.primaryInk} />
                         <View style={styles.infoContent}>
                             <Text style={styles.infoLabel}>Added On</Text>
                             <Text style={styles.infoValue}>{formatDate(item.createdAt)}</Text>
@@ -206,7 +207,7 @@ export default function FoodDetailScreen() {
 
                     {item.isEstimated && (
                         <View style={styles.estimatedBanner}>
-                            <Ionicons name="information-circle-outline" size={20} color="#854d0e" />
+                            <Ionicons name="information-circle-outline" size={20} color={expiria.colors.statusYellowText} />
                             <Text style={styles.estimatedText}>
                                 Expiration date is an AI estimate. Scan the label or edit manually for accuracy.
                             </Text>
@@ -227,7 +228,7 @@ export default function FoodDetailScreen() {
                         style={styles.scanLabelButton}
                         onPress={() => setShowLabelScanner(true)}
                     >
-                        <Ionicons name="camera-outline" size={20} color="#3b82f6" />
+                        <Ionicons name="camera-outline" size={20} color={expiria.colors.primaryInk} />
                         <Text style={styles.scanLabelText}>Scan Product Label</Text>
                     </TouchableOpacity>
                 </View>
@@ -243,7 +244,7 @@ export default function FoodDetailScreen() {
                             <Text style={styles.saveButtonText}>Saving...</Text>
                         ) : (
                             <>
-                                <Ionicons name="checkmark" size={20} color="#ffffff" />
+                                <Ionicons name="checkmark" size={20} color={expiria.colors.canvas} />
                                 <Text style={styles.saveButtonText}>Save Changes</Text>
                             </>
                         )}
@@ -254,7 +255,7 @@ export default function FoodDetailScreen() {
             {/* Delete Button */}
             <View style={styles.bottomActions}>
                 <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-                    <Ionicons name="trash-outline" size={20} color="#ef4444" />
+                    <Ionicons name="trash-outline" size={20} color={expiria.colors.statusRedText} />
                     <Text style={styles.deleteButtonText}>Delete Item</Text>
                 </TouchableOpacity>
             </View>
@@ -285,163 +286,159 @@ export default function FoodDetailScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9fafb',
+        backgroundColor: expiria.colors.primarySurface,
     },
     scrollView: {
         flex: 1,
     },
     content: {
-        padding: 16,
+        padding: expiria.spacing.md,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        marginBottom: 24,
+        marginBottom: expiria.spacing.lg,
     },
     itemName: {
-        fontSize: 28,
-        fontWeight: '700',
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.heading,
+        fontWeight: expiria.typography.weights.bold,
+        color: expiria.colors.primaryInk,
         flex: 1,
-        marginRight: 12,
+        marginRight: expiria.spacing.sm + 4,
     },
     infoSection: {
-        marginBottom: 24,
+        marginBottom: expiria.spacing.lg,
     },
     infoCard: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderRadius: 12,
-        padding: 16,
-        marginBottom: 12,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-        elevation: 1,
+        backgroundColor: expiria.colors.secondarySurface,
+        borderRadius: expiria.borderRadius.sm + 4,
+        padding: expiria.spacing.md,
+        marginBottom: expiria.spacing.sm + 4,
+        ...expiria.shadows.soft,
     },
     infoContent: {
-        marginLeft: 12,
+        marginLeft: expiria.spacing.sm + 4,
     },
     infoLabel: {
-        fontSize: 12,
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.small + 1,
+        color: expiria.colors.textMuted,
         marginBottom: 2,
     },
     infoValue: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
     },
     estimatedBanner: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        backgroundColor: '#fef9c3',
-        borderRadius: 8,
-        padding: 12,
-        gap: 8,
+        backgroundColor: expiria.colors.statusYellowBg,
+        borderRadius: expiria.borderRadius.sm,
+        padding: expiria.spacing.sm + 4,
+        gap: expiria.spacing.sm,
     },
     estimatedText: {
         flex: 1,
-        fontSize: 13,
-        color: '#854d0e',
+        fontSize: expiria.typography.sizes.caption,
+        color: expiria.colors.statusYellowText,
         lineHeight: 18,
     },
     section: {
-        marginBottom: 24,
+        marginBottom: expiria.spacing.lg,
     },
     sectionTitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#1a1a1a',
-        marginBottom: 12,
+        fontSize: expiria.typography.sizes.subheading - 2,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
+        marginBottom: expiria.spacing.sm + 4,
     },
     scanLabelButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#eff6ff',
-        borderWidth: 1,
-        borderColor: '#3b82f6',
-        borderRadius: 8,
-        paddingVertical: 12,
-        gap: 8,
+        backgroundColor: expiria.colors.canvas,
+        borderWidth: expiria.strokes.thin,
+        borderColor: expiria.colors.primaryInk,
+        borderRadius: expiria.borderRadius.sm,
+        paddingVertical: expiria.spacing.sm + 4,
+        gap: expiria.spacing.sm,
     },
     scanLabelText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#3b82f6',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.primaryInk,
     },
     saveButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#3b82f6',
-        borderRadius: 8,
-        paddingVertical: 14,
-        gap: 8,
+        backgroundColor: expiria.colors.primaryInk,
+        borderRadius: expiria.borderRadius.sm,
+        paddingVertical: expiria.spacing.sm + 6,
+        gap: expiria.spacing.sm,
     },
     saveButtonDisabled: {
-        backgroundColor: '#9ca3af',
+        backgroundColor: expiria.colors.textMuted,
     },
     saveButtonText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#ffffff',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.canvas,
     },
     bottomActions: {
-        padding: 16,
-        borderTopWidth: 1,
-        borderTopColor: '#e5e7eb',
-        backgroundColor: '#ffffff',
+        padding: expiria.spacing.md,
+        borderTopWidth: expiria.strokes.thin,
+        borderTopColor: expiria.colors.border,
+        backgroundColor: expiria.colors.secondarySurface,
     },
     deleteButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fef2f2',
-        borderWidth: 1,
-        borderColor: '#fecaca',
-        borderRadius: 8,
-        paddingVertical: 12,
-        gap: 8,
+        backgroundColor: expiria.colors.statusRedBg,
+        borderWidth: expiria.strokes.thin,
+        borderColor: expiria.colors.statusRedBg,
+        borderRadius: expiria.borderRadius.sm,
+        paddingVertical: expiria.spacing.sm + 4,
+        gap: expiria.spacing.sm,
     },
     deleteButtonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#ef4444',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.statusRedText,
     },
     notFoundContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 32,
+        padding: expiria.spacing.xl,
     },
     notFoundTitle: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: '#1f2937',
-        marginTop: 16,
+        fontSize: expiria.typography.sizes.subheading,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
+        marginTop: expiria.spacing.md,
     },
     notFoundText: {
         fontSize: 14,
-        color: '#6b7280',
+        color: expiria.colors.textMuted,
         textAlign: 'center',
-        marginTop: 8,
+        marginTop: expiria.spacing.sm,
     },
     backButton: {
-        marginTop: 24,
-        paddingHorizontal: 24,
-        paddingVertical: 12,
-        backgroundColor: '#3b82f6',
-        borderRadius: 8,
+        marginTop: expiria.spacing.lg,
+        paddingHorizontal: expiria.spacing.lg,
+        paddingVertical: expiria.spacing.sm + 4,
+        backgroundColor: expiria.colors.primaryInk,
+        borderRadius: expiria.borderRadius.sm,
     },
     backButtonText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#ffffff',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.canvas,
     },
     processingContainer: {
         flex: 1,

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TrafficLightStatus } from '../types';
 import { formatRelativeExpiration } from '../utils/dateUtils';
+import { expiria } from '../theme';
 
 interface ExpirationBadgeProps {
     status: TrafficLightStatus;
@@ -10,16 +11,16 @@ interface ExpirationBadgeProps {
 
 const statusColors: Record<TrafficLightStatus, { background: string; text: string }> = {
     green: {
-        background: '#dcfce7',
-        text: '#166534',
+        background: expiria.colors.statusGreenBg,
+        text: expiria.colors.statusGreenText,
     },
     yellow: {
-        background: '#fef9c3',
-        text: '#854d0e',
+        background: expiria.colors.statusYellowBg,
+        text: expiria.colors.statusYellowText,
     },
     red: {
-        background: '#fee2e2',
-        text: '#991b1b',
+        background: expiria.colors.statusRedBg,
+        text: expiria.colors.statusRedText,
     },
 };
 
@@ -39,19 +40,19 @@ const styles = StyleSheet.create({
     badge: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderRadius: 16,
+        paddingHorizontal: expiria.spacing.sm + 2,
+        paddingVertical: expiria.spacing.xs + 2,
+        borderRadius: expiria.borderRadius.lg,
         alignSelf: 'flex-start',
     },
     dot: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        marginRight: 6,
+        width: expiria.spacing.sm,
+        height: expiria.spacing.sm,
+        borderRadius: expiria.spacing.xs,
+        marginRight: expiria.spacing.xs + 2,
     },
     text: {
-        fontSize: 13,
-        fontWeight: '600',
+        fontSize: expiria.typography.sizes.caption,
+        fontWeight: expiria.typography.weights.semibold,
     },
 });

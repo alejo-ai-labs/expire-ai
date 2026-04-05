@@ -19,6 +19,7 @@ import { ExtractedFoodItem } from '../../types';
 import { CameraError } from '../../hooks/useCamera';
 import { addDays, toISODateString } from '../../utils/dateUtils';
 import * as api from '../../services/api';
+import { expiria } from '../../theme';
 
 type ScanState = 'camera' | 'processing' | 'confirm' | 'error';
 
@@ -178,11 +179,11 @@ export default function ScanScreen() {
         return (
             <SafeAreaView style={styles.container} edges={['bottom']}>
                 <View style={styles.errorContainer}>
-                    <Ionicons name="alert-circle-outline" size={64} color="#ef4444" />
+                    <Ionicons name="alert-circle-outline" size={64} color={expiria.colors.statusRedText} />
                     <Text style={styles.errorTitle}>Scan Failed</Text>
                     <Text style={styles.errorText}>{errorMessage}</Text>
                     <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
-                        <Ionicons name="refresh" size={20} color="#ffffff" />
+                        <Ionicons name="refresh" size={20} color={expiria.colors.canvas} />
                         <Text style={styles.retryButtonText}>Try Again</Text>
                     </TouchableOpacity>
                 </View>
@@ -208,7 +209,7 @@ export default function ScanScreen() {
                             <Ionicons
                                 name={item.selected ? 'checkbox' : 'square-outline'}
                                 size={24}
-                                color={item.selected ? '#3b82f6' : '#9ca3af'}
+                                color={item.selected ? expiria.colors.primaryInk : expiria.colors.textMuted}
                             />
                         </TouchableOpacity>
 
@@ -233,7 +234,7 @@ export default function ScanScreen() {
                             style={styles.removeButton}
                             onPress={() => removeItem(item.id)}
                         >
-                            <Ionicons name="close-circle" size={24} color="#ef4444" />
+                            <Ionicons name="close-circle" size={24} color={expiria.colors.statusRedText} />
                         </TouchableOpacity>
                     </View>
                 ))}
@@ -260,7 +261,7 @@ export default function ScanScreen() {
                     onPress={handleSaveItems}
                     disabled={extractedItems.filter(i => i.selected).length === 0}
                 >
-                    <Ionicons name="checkmark" size={20} color="#ffffff" />
+                    <Ionicons name="checkmark" size={20} color={expiria.colors.canvas} />
                     <Text style={styles.saveButtonText}>
                         Save ({extractedItems.filter(i => i.selected).length})
                     </Text>
@@ -273,165 +274,161 @@ export default function ScanScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9fafb',
+        backgroundColor: expiria.colors.primarySurface,
     },
     processingSubtext: {
         textAlign: 'center',
-        color: '#6b7280',
-        fontSize: 14,
+        color: expiria.colors.textMuted,
+        fontSize: expiria.typography.sizes.caption + 1,
         marginTop: -60,
-        paddingHorizontal: 20,
+        paddingHorizontal: expiria.spacing.lg - 4,
     },
     errorContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 32,
+        padding: expiria.spacing.xl,
     },
     errorTitle: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: '#1f2937',
-        marginTop: 16,
+        fontSize: expiria.typography.sizes.subheading,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
+        marginTop: expiria.spacing.md,
     },
     errorText: {
-        fontSize: 14,
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.caption + 1,
+        color: expiria.colors.textMuted,
         textAlign: 'center',
-        marginTop: 8,
+        marginTop: expiria.spacing.sm,
         lineHeight: 20,
     },
     retryButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#3b82f6',
-        paddingHorizontal: 24,
-        paddingVertical: 12,
-        borderRadius: 8,
-        marginTop: 24,
-        gap: 8,
+        backgroundColor: expiria.colors.primaryInk,
+        paddingHorizontal: expiria.spacing.lg,
+        paddingVertical: expiria.spacing.sm + 4,
+        borderRadius: expiria.borderRadius.sm,
+        marginTop: expiria.spacing.lg,
+        gap: expiria.spacing.sm,
     },
     retryButtonText: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: '600',
+        color: expiria.colors.canvas,
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
     },
     confirmContainer: {
         flex: 1,
-        padding: 16,
+        padding: expiria.spacing.md,
     },
     confirmTitle: {
-        fontSize: 24,
-        fontWeight: '700',
-        color: '#1a1a1a',
-        marginBottom: 4,
+        fontSize: expiria.typography.sizes.heading - 4,
+        fontWeight: expiria.typography.weights.bold,
+        color: expiria.colors.primaryInk,
+        marginBottom: expiria.spacing.xs,
     },
     confirmSubtitle: {
-        fontSize: 14,
-        color: '#6b7280',
-        marginBottom: 20,
+        fontSize: expiria.typography.sizes.caption + 1,
+        color: expiria.colors.textMuted,
+        marginBottom: expiria.spacing.lg - 4,
     },
     itemCard: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderRadius: 12,
-        padding: 12,
-        marginBottom: 12,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-        elevation: 1,
+        backgroundColor: expiria.colors.secondarySurface,
+        borderRadius: expiria.borderRadius.sm + 4,
+        padding: expiria.spacing.sm + 4,
+        marginBottom: expiria.spacing.sm + 4,
+        ...expiria.shadows.soft,
     },
     checkbox: {
-        marginRight: 12,
+        marginRight: expiria.spacing.sm + 4,
     },
     itemContent: {
         flex: 1,
     },
     itemNameInput: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#1a1a1a',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
         padding: 0,
-        marginBottom: 4,
+        marginBottom: expiria.spacing.xs,
     },
     itemExpiry: {
-        fontSize: 13,
-        color: '#6b7280',
-        marginBottom: 4,
+        fontSize: expiria.typography.sizes.caption,
+        color: expiria.colors.textMuted,
+        marginBottom: expiria.spacing.xs,
     },
     confidenceBadge: {
-        backgroundColor: '#e5e7eb',
-        paddingHorizontal: 8,
+        backgroundColor: expiria.colors.border,
+        paddingHorizontal: expiria.spacing.sm,
         paddingVertical: 2,
-        borderRadius: 4,
+        borderRadius: expiria.borderRadius.sm / 2,
         alignSelf: 'flex-start',
     },
     confidenceText: {
-        fontSize: 11,
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.small,
+        color: expiria.colors.textMuted,
     },
     removeButton: {
-        padding: 4,
+        padding: expiria.spacing.xs,
     },
     emptyItems: {
         alignItems: 'center',
-        padding: 32,
+        padding: expiria.spacing.xl,
     },
     emptyItemsText: {
-        fontSize: 16,
-        color: '#6b7280',
-        marginBottom: 16,
+        fontSize: expiria.typography.sizes.body,
+        color: expiria.colors.textMuted,
+        marginBottom: expiria.spacing.md,
     },
     scanAgainButton: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        backgroundColor: '#e5e7eb',
-        borderRadius: 8,
+        paddingHorizontal: expiria.spacing.lg - 4,
+        paddingVertical: expiria.spacing.sm + 2,
+        backgroundColor: expiria.colors.border,
+        borderRadius: expiria.borderRadius.sm,
     },
     scanAgainText: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#374151',
+        fontSize: expiria.typography.sizes.caption + 1,
+        fontWeight: expiria.typography.weights.medium,
+        color: expiria.colors.primaryInk,
     },
     bottomActions: {
         flexDirection: 'row',
-        padding: 16,
-        gap: 12,
-        borderTopWidth: 1,
-        borderTopColor: '#e5e7eb',
-        backgroundColor: '#ffffff',
+        padding: expiria.spacing.md,
+        gap: expiria.spacing.sm + 4,
+        borderTopWidth: expiria.strokes.thin,
+        borderTopColor: expiria.colors.border,
+        backgroundColor: expiria.colors.secondarySurface,
     },
     cancelButton: {
         flex: 1,
-        paddingVertical: 14,
-        borderRadius: 8,
-        backgroundColor: '#e5e7eb',
+        paddingVertical: expiria.spacing.sm + 6,
+        borderRadius: expiria.borderRadius.sm,
+        backgroundColor: expiria.colors.border,
         alignItems: 'center',
     },
     cancelButtonText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#374151',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
     },
     saveButton: {
         flex: 1,
         flexDirection: 'row',
-        paddingVertical: 14,
-        borderRadius: 8,
-        backgroundColor: '#3b82f6',
+        paddingVertical: expiria.spacing.sm + 6,
+        borderRadius: expiria.borderRadius.sm,
+        backgroundColor: expiria.colors.primaryInk,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 8,
+        gap: expiria.spacing.sm,
     },
     saveButtonDisabled: {
-        backgroundColor: '#9ca3af',
+        backgroundColor: expiria.colors.textMuted,
     },
     saveButtonText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#ffffff',
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.canvas,
     },
 });

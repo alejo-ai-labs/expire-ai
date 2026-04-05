@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { expiria } from '../theme';
 
 interface EmptyStateProps {
     icon?: keyof typeof Ionicons.glyphMap;
@@ -20,13 +21,13 @@ export function EmptyState({
     return (
         <View style={styles.container}>
             <View style={styles.iconContainer}>
-                <Ionicons name={icon} size={64} color="#d1d5db" />
+                <Ionicons name={icon} size={64} color={expiria.colors.border} />
             </View>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.message}>{message}</Text>
             {actionLabel && onAction && (
                 <TouchableOpacity style={styles.button} onPress={onAction}>
-                    <Ionicons name="add-circle-outline" size={20} color="#ffffff" />
+                    <Ionicons name="add-circle-outline" size={20} color={expiria.colors.canvas} />
                     <Text style={styles.buttonText}>{actionLabel}</Text>
                 </TouchableOpacity>
             )}
@@ -39,43 +40,43 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 32,
+        padding: expiria.spacing.xl,
     },
     iconContainer: {
         width: 120,
         height: 120,
-        borderRadius: 60,
-        backgroundColor: '#f3f4f6',
+        borderRadius: expiria.borderRadius.full,
+        backgroundColor: expiria.colors.canvas,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 24,
+        marginBottom: expiria.spacing.lg,
     },
     title: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: '#1a1a1a',
-        marginBottom: 8,
+        fontSize: expiria.typography.sizes.subheading,
+        fontWeight: expiria.typography.weights.semibold,
+        color: expiria.colors.primaryInk,
+        marginBottom: expiria.spacing.sm,
         textAlign: 'center',
     },
     message: {
-        fontSize: 16,
-        color: '#6b7280',
+        fontSize: expiria.typography.sizes.body,
+        color: expiria.colors.textMuted,
         textAlign: 'center',
         lineHeight: 24,
-        marginBottom: 24,
+        marginBottom: expiria.spacing.lg,
     },
     button: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#3b82f6',
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-        borderRadius: 8,
+        backgroundColor: expiria.colors.primaryInk,
+        paddingHorizontal: expiria.spacing.lg - 4,
+        paddingVertical: expiria.spacing.md - 4,
+        borderRadius: expiria.borderRadius.sm,
     },
     buttonText: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: '600',
-        marginLeft: 8,
+        color: expiria.colors.canvas,
+        fontSize: expiria.typography.sizes.body,
+        fontWeight: expiria.typography.weights.semibold,
+        marginLeft: expiria.spacing.sm,
     },
 });
