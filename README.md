@@ -1,14 +1,74 @@
 # Expiria
 
-A mobile app for tracking food expiration dates using AI-powered receipt scanning. Built with React Native (Expo), Tamagui, and Express.js.
+> Stop throwing away food you forgot you had.
+
+Expiria tracks your food's expiration dates so you don't have to. Snap a receipt, let AI do the work, and get notified before things go bad.
+
+<p align="center">
+  <img src="docs/gifs/hero-overview.gif" alt="Expiria app overview" width="320" />
+</p>
+
+---
 
 ## Overview
 
 Expiria helps users reduce food waste by tracking expiration dates of purchased items. Scan your shopping receipt and the app uses a multimodal LLM to extract food items and estimate expiration dates. Get timely notifications before items expire, with a pastel traffic-light card interface for quick visual assessment.
 
+---
+
+## Features
+
+<table>
+<tr>
+<td align="center" width="50%">
+
+### 📸 Receipt Scanning
+Capture receipts with your phone camera. AI extracts every food item and estimates expiration dates automatically.
+
+<img src="docs/gifs/receipt-scan.gif" alt="Receipt scanning demo" width="260" />
+
+</td>
+<td align="center" width="50%">
+
+### 🚦 Traffic Light Status
+Pastel green/yellow/red badges give you an instant read on food freshness — no guessing.
+
+<img src="docs/gifs/food-list-status.gif" alt="Food list with traffic light status" width="260" />
+
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+
+### 📅 Manual Date Adjustment
+Edit dates or scan product labels directly for pinpoint accuracy.
+
+<img src="docs/gifs/label-scan.gif" alt="Product label scanning" width="260" />
+
+</td>
+<td align="center" width="50%">
+
+### 🔔 Smart Notifications
+Alerts at 3 days, 1 day, and on expiration day. Tap to jump straight to the item.
+
+<img src="docs/gifs/notifications.gif" alt="Push notification demo" width="260" />
+
+</td>
+</tr>
+</table>
+
+- 💾 **Offline Support** — queue changes when offline, sync when connected
+- 📱 **Cross-Platform** — iOS and Android via Expo
+
+---
+
 ## Design System
 
 The visual identity is anchored in the adaptive icon — a flat, thick-outlined apple with a clock and leaf in sage greens, warm cream, and terracotta on a soft white plate. Every UI decision flows from this icon's mood: calm, friendly, organic pastels with squircle shapes and generous spacing.
+
+<p align="center">
+  <img src="docs/gifs/design-showcase.gif" alt="Design system and theme showcase" width="320" />
+</p>
 
 ### Color Palette
 
@@ -22,15 +82,7 @@ The visual identity is anchored in the adaptive icon — a flat, thick-outlined 
 
 The design system is documented in `design-system/expiria/MASTER.md` and implemented as a centralized Tamagui theme module at `mobile/src/theme/`.
 
-## Features
-
-- 📸 Receipt Scanning — capture receipts with your phone camera
-- 🤖 AI-Powered Extraction — automatically extract food items and estimate expiration dates
-- 🚦 Traffic Light Status — pastel green/yellow/red badges for food freshness
-- 📅 Manual Date Adjustment — edit dates or scan product labels for accuracy
-- 🔔 Smart Notifications — alerts at 3 days, 1 day, and on expiration day
-- 💾 Offline Support — queue changes when offline, sync when connected
-- 📱 Cross-Platform — iOS and Android via Expo
+---
 
 ## Tech Stack
 
@@ -47,6 +99,8 @@ The design system is documented in `design-system/expiria/MASTER.md` and impleme
 - Prisma ORM + SQLite (dev) / PostgreSQL (prod)
 - OpenAI GPT-4 Vision API
 - Expo Push Notifications
+
+---
 
 ## Project Structure
 
@@ -67,10 +121,12 @@ expiria/
     ├── src/
     │   ├── routes/        # API route handlers
     │   ├── services/      # External service integrations
-    │   └── middleware/     # Express middleware
+    │   └── middleware/    # Express middleware
     ├── prisma/            # Database schema and migrations
     └── package.json
 ```
+
+---
 
 ## Getting Started
 
@@ -106,6 +162,8 @@ Press `i` for iOS Simulator, `a` for Android Emulator, or scan the QR code with 
 
 Update the API URL in `src/services/api.ts` if needed.
 
+---
+
 ## Usage
 
 ### Scanning a Receipt
@@ -126,6 +184,8 @@ Update the API URL in `src/services/api.ts` if needed.
 
 Push notifications fire at 3 days, 1 day, and on expiration day. Tap to view the item.
 
+---
+
 ## API Endpoints
 
 | Method | Endpoint | Description |
@@ -138,6 +198,8 @@ Push notifications fire at 3 days, 1 day, and on expiration day. Tap to view the
 | POST | `/api/scan/receipt` | Process receipt image |
 | POST | `/api/scan/label` | Process product label image |
 | POST | `/api/notifications/register` | Register push token |
+
+---
 
 ## Troubleshooting
 
@@ -155,6 +217,8 @@ Push notifications fire at 3 days, 1 day, and on expiration day. Tap to view the
 - Ensure notification permissions are granted
 - Check that push token is registered with backend
 - Verify cron job is running (backend logs)
+
+---
 
 ## License
 
