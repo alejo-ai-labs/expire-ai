@@ -20,6 +20,7 @@ import { CameraError } from '../../hooks/useCamera';
 import { addDays, toISODateString } from '../../utils/dateUtils';
 import * as api from '../../services/api';
 import { expiria } from '../../theme';
+import { useThemeColors } from '../../context/ThemeContext';
 
 type ScanState = 'camera' | 'processing' | 'confirm' | 'error';
 
@@ -31,6 +32,7 @@ interface EditableItem extends ExtractedFoodItem {
 export default function ScanScreen() {
     const router = useRouter();
     const { addItems } = useFoodItems();
+    const colors = useThemeColors();
 
     const [scanState, setScanState] = useState<ScanState>('camera');
     const [extractedItems, setExtractedItems] = useState<EditableItem[]>([]);
@@ -165,9 +167,9 @@ export default function ScanScreen() {
     // Render processing state
     if (scanState === 'processing') {
         return (
-            <SafeAreaView style={styles.container} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
                 <LoadingSpinner message="Processing receipt..." />
-                <Text style={styles.processingSubtext}>
+                <Text style={[styles.processingSubtext, { color: colors.textMuted }]}>
                     Our AI is extracting food items from your receipt
                 </Text>
             </SafeAreaView>
@@ -177,14 +179,14 @@ export default function ScanScreen() {
     // Render error state
     if (scanState === 'error') {
         return (
-            <SafeAreaView style={styles.container} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
                 <View style={styles.errorContainer}>
-                    <Ionicons name="alert-circle-outline" size={64} color={expiria.colors.statusRedText} />
-                    <Text style={styles.errorTitle}>Scan Failed</Text>
-                    <Text style={styles.errorText}>{errorMessage}</Text>
-                    <TouchableOpacity style={styles.retryButton} onPress={handleRetry}>
-                        <Ionicons name="refresh" size={20} color={expiria.colors.canvas} />
-                        <Text style={styles.retryButtonText}>Try Again</Text>
+                    <Ionicons name="alert-circle-outline" size={64} color={colors.statusRedText} />
+                    <Text style={[styles.errorTitle, { color: colors.primaryInk }]}>Scan Failed</Text>
+                    <Text style={[styles.errorText, { color: colors.textMuted }]}>{errorMessage}</Text>
+                    <TouchableOpacity style={[styles.retryButton, { backgroundColor: colors.primaryInk }]} onPress={handleRetry}>
+                        <Ionicons name="refresh" size={20} color={colors.canvas} />
+                        <Text style={[styles.retryButtonText, { color: colors.canvas }]}>Try Again</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
@@ -193,15 +195,15 @@ export default function ScanScreen() {
 
     // Render confirmation view
     return (
-        <SafeAreaView style={styles.container} edges={['bottom']}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
             <ScrollView style={styles.confirmContainer}>
-                <Text style={styles.confirmTitle}>Confirm Items</Text>
-                <Text style={styles.confirmSubtitle}>
+                <Text style={[styles.confirmTitle, { color: colors.primaryInk }]}>Confirm Items</Text>
+                <Text style={[styles.confirmSubtitle, { color: colors.textMuted }]}>
                     Review and edit the extracted items before saving
                 </Text>
 
                 {extractedItems.map(item => (
-                    <View key={item.id} style={styles.itemCard}>
+                    <View key={item.id} style={[styles.itemCard, { backgroundColor: colors.secondarySurface }]}>
                         <TouchableOpacity
                             style={styles.checkbox}
                             onPress={() => toggleItemSelection(item.id)}
@@ -209,22 +211,22 @@ export default function ScanScreen() {
                             <Ionicons
                                 name={item.selected ? 'checkbox' : 'square-outline'}
                                 size={24}
-                                color={item.selected ? expiria.colors.primaryInk : expiria.colors.textMuted}
+                                color={item.selected ? colors.primaryInk : colors.textMuted}
                             />
                         </TouchableOpacity>
 
                         <View style={styles.itemContent}>
                             <TextInput
-                                style={styles.itemNameInput}
+                                style={[styles.itemNameInput, { color: colors.primaryInk }]}
                                 value={item.name}
                                 onChangeText={(text) => updateItemName(item.id, text)}
                                 placeholder="Item name"
                             />
-                            <Text style={styles.itemExpiry}>
+                            <Text style={[styles.itemExpiry, { color: colors.textMuted }]}>
                                 Expires in ~{item.estimatedExpirationDays} days
                             </Text>
-                            <View style={styles.confidenceBadge}>
-                                <Text style={styles.confidenceText}>
+                            <View style={[styles.confidenceBadge, { backgroundColor: colors.border }]}>
+                                <Text style={[styles.confidenceText, { color: colors.textMuted }]}>
                                     {Math.round(item.confidence * 100)}% confidence
                                 </Text>
                             </View>
@@ -234,35 +236,36 @@ export default function ScanScreen() {
                             style={styles.removeButton}
                             onPress={() => removeItem(item.id)}
                         >
-                            <Ionicons name="close-circle" size={24} color={expiria.colors.statusRedText} />
+                            <Ionicons name="close-circle" size={24} color={colors.statusRedText} />
                         </TouchableOpacity>
                     </View>
                 ))}
 
                 {extractedItems.length === 0 && (
                     <View style={styles.emptyItems}>
-                        <Text style={styles.emptyItemsText}>No items to confirm</Text>
-                        <TouchableOpacity style={styles.scanAgainButton} onPress={handleRetry}>
-                            <Text style={styles.scanAgainText}>Scan Again</Text>
+                        <Text style={[styles.emptyItemsText, { color: colors.textMuted }]}>No items to confirm</Text>
+                        <TouchableOpacity style={[styles.scanAgainButton, { backgroundColor: colors.border }]} onPress={handleRetry}>
+                            <Text style={[styles.scanAgainText, { color: colors.primaryInk }]}>Scan Again</Text>
                         </TouchableOpacity>
                     </View>
                 )}
             </ScrollView>
 
-            <View style={styles.bottomActions}>
-                <TouchableOpacity style={styles.cancelButton} onPress={handleRetry}>
-                    <Text style={styles.cancelButtonText}>Scan Again</Text>
+            <View style={[styles.bottomActions, { borderTopColor: colors.border, backgroundColor: colors.secondarySurface }]}>
+                <TouchableOpacity style={[styles.cancelButton, { backgroundColor: colors.border }]} onPress={handleRetry}>
+                    <Text style={[styles.cancelButtonText, { color: colors.primaryInk }]}>Scan Again</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[
                         styles.saveButton,
-                        extractedItems.filter(i => i.selected).length === 0 && styles.saveButtonDisabled,
+                        { backgroundColor: colors.primaryInk },
+                        extractedItems.filter(i => i.selected).length === 0 && { backgroundColor: colors.textMuted },
                     ]}
                     onPress={handleSaveItems}
                     disabled={extractedItems.filter(i => i.selected).length === 0}
                 >
-                    <Ionicons name="checkmark" size={20} color={expiria.colors.canvas} />
-                    <Text style={styles.saveButtonText}>
+                    <Ionicons name="checkmark" size={20} color={colors.canvas} />
+                    <Text style={[styles.saveButtonText, { color: colors.canvas }]}>
                         Save ({extractedItems.filter(i => i.selected).length})
                     </Text>
                 </TouchableOpacity>
@@ -274,11 +277,9 @@ export default function ScanScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: expiria.colors.primarySurface,
     },
     processingSubtext: {
         textAlign: 'center',
-        color: expiria.colors.textMuted,
         fontSize: expiria.typography.sizes.caption + 1,
         marginTop: -60,
         paddingHorizontal: expiria.spacing.lg - 4,
@@ -292,12 +293,10 @@ const styles = StyleSheet.create({
     errorTitle: {
         fontSize: expiria.typography.sizes.subheading,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
         marginTop: expiria.spacing.md,
     },
     errorText: {
         fontSize: expiria.typography.sizes.caption + 1,
-        color: expiria.colors.textMuted,
         textAlign: 'center',
         marginTop: expiria.spacing.sm,
         lineHeight: 20,
@@ -305,7 +304,6 @@ const styles = StyleSheet.create({
     retryButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: expiria.colors.primaryInk,
         paddingHorizontal: expiria.spacing.lg,
         paddingVertical: expiria.spacing.sm + 4,
         borderRadius: expiria.borderRadius.sm,
@@ -313,7 +311,6 @@ const styles = StyleSheet.create({
         gap: expiria.spacing.sm,
     },
     retryButtonText: {
-        color: expiria.colors.canvas,
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
     },
@@ -324,18 +321,15 @@ const styles = StyleSheet.create({
     confirmTitle: {
         fontSize: expiria.typography.sizes.heading - 4,
         fontWeight: expiria.typography.weights.bold,
-        color: expiria.colors.primaryInk,
         marginBottom: expiria.spacing.xs,
     },
     confirmSubtitle: {
         fontSize: expiria.typography.sizes.caption + 1,
-        color: expiria.colors.textMuted,
         marginBottom: expiria.spacing.lg - 4,
     },
     itemCard: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: expiria.colors.secondarySurface,
         borderRadius: expiria.borderRadius.sm + 4,
         padding: expiria.spacing.sm + 4,
         marginBottom: expiria.spacing.sm + 4,
@@ -350,17 +344,14 @@ const styles = StyleSheet.create({
     itemNameInput: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
         padding: 0,
         marginBottom: expiria.spacing.xs,
     },
     itemExpiry: {
         fontSize: expiria.typography.sizes.caption,
-        color: expiria.colors.textMuted,
         marginBottom: expiria.spacing.xs,
     },
     confidenceBadge: {
-        backgroundColor: expiria.colors.border,
         paddingHorizontal: expiria.spacing.sm,
         paddingVertical: 2,
         borderRadius: expiria.borderRadius.sm / 2,
@@ -368,7 +359,6 @@ const styles = StyleSheet.create({
     },
     confidenceText: {
         fontSize: expiria.typography.sizes.small,
-        color: expiria.colors.textMuted,
     },
     removeButton: {
         padding: expiria.spacing.xs,
@@ -379,56 +369,44 @@ const styles = StyleSheet.create({
     },
     emptyItemsText: {
         fontSize: expiria.typography.sizes.body,
-        color: expiria.colors.textMuted,
         marginBottom: expiria.spacing.md,
     },
     scanAgainButton: {
         paddingHorizontal: expiria.spacing.lg - 4,
         paddingVertical: expiria.spacing.sm + 2,
-        backgroundColor: expiria.colors.border,
         borderRadius: expiria.borderRadius.sm,
     },
     scanAgainText: {
         fontSize: expiria.typography.sizes.caption + 1,
         fontWeight: expiria.typography.weights.medium,
-        color: expiria.colors.primaryInk,
     },
     bottomActions: {
         flexDirection: 'row',
         padding: expiria.spacing.md,
         gap: expiria.spacing.sm + 4,
         borderTopWidth: expiria.strokes.thin,
-        borderTopColor: expiria.colors.border,
-        backgroundColor: expiria.colors.secondarySurface,
     },
     cancelButton: {
         flex: 1,
         paddingVertical: expiria.spacing.sm + 6,
         borderRadius: expiria.borderRadius.sm,
-        backgroundColor: expiria.colors.border,
         alignItems: 'center',
     },
     cancelButtonText: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
     },
     saveButton: {
         flex: 1,
         flexDirection: 'row',
         paddingVertical: expiria.spacing.sm + 6,
         borderRadius: expiria.borderRadius.sm,
-        backgroundColor: expiria.colors.primaryInk,
         alignItems: 'center',
         justifyContent: 'center',
         gap: expiria.spacing.sm,
     },
-    saveButtonDisabled: {
-        backgroundColor: expiria.colors.textMuted,
-    },
     saveButtonText: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.canvas,
     },
 });

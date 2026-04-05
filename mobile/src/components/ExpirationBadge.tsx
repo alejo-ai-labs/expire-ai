@@ -3,35 +3,38 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TrafficLightStatus } from '../types';
 import { formatRelativeExpiration } from '../utils/dateUtils';
 import { expiria } from '../theme';
+import { useThemeColors } from '../context/ThemeContext';
 
 interface ExpirationBadgeProps {
     status: TrafficLightStatus;
     daysUntilExpiration: number;
 }
 
-const statusColors: Record<TrafficLightStatus, { background: string; text: string }> = {
-    green: {
-        background: expiria.colors.statusGreenBg,
-        text: expiria.colors.statusGreenText,
-    },
-    yellow: {
-        background: expiria.colors.statusYellowBg,
-        text: expiria.colors.statusYellowText,
-    },
-    red: {
-        background: expiria.colors.statusRedBg,
-        text: expiria.colors.statusRedText,
-    },
-};
-
 export function ExpirationBadge({ status, daysUntilExpiration }: ExpirationBadgeProps) {
-    const colors = statusColors[status];
+    const colors = useThemeColors();
     const expirationText = formatRelativeExpiration(daysUntilExpiration);
 
+    const statusColors: Record<TrafficLightStatus, { background: string; text: string }> = {
+        green: {
+            background: colors.statusGreenBg,
+            text: colors.statusGreenText,
+        },
+        yellow: {
+            background: colors.statusYellowBg,
+            text: colors.statusYellowText,
+        },
+        red: {
+            background: colors.statusRedBg,
+            text: colors.statusRedText,
+        },
+    };
+
+    const statusColor = statusColors[status];
+
     return (
-        <View style={[styles.badge, { backgroundColor: colors.background }]}>
-            <View style={[styles.dot, { backgroundColor: colors.text }]} />
-            <Text style={[styles.text, { color: colors.text }]}>{expirationText}</Text>
+        <View style={[styles.badge, { backgroundColor: statusColor.background }]}>
+            <View style={[styles.dot, { backgroundColor: statusColor.text }]} />
+            <Text style={[styles.text, { color: statusColor.text }]}>{expirationText}</Text>
         </View>
     );
 }

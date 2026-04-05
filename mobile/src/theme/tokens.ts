@@ -20,6 +20,22 @@ export const tokens = createTokens({
     statusRedBg: '#F8D7DA',
     statusRedText: '#8B3A3A',
 
+    // Dark Mode Palette
+    darkCanvas: '#1A1E1B',
+    darkPrimaryInk: '#C8D8C8',
+    darkPrimarySurface: '#2A3A2E',
+    darkSecondarySurface: '#2C2824',
+    darkAccent: '#D4956E',
+    darkText: '#C8D8C8',
+    darkTextMuted: '#8A9B8A',
+    darkBorder: '#3A4A3E',
+    darkStatusGreenBg: '#1E3A1E',
+    darkStatusGreenText: '#7BC67B',
+    darkStatusYellowBg: '#3A3218',
+    darkStatusYellowText: '#D4B44A',
+    darkStatusRedBg: '#3A1E1E',
+    darkStatusRedText: '#E08080',
+
     // Utility
     white: '#FFFFFF',
     black: '#000000',

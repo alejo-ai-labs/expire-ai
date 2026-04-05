@@ -1,6 +1,6 @@
 export { default as tamaguiConfig } from './tamagui.config'
 export { tokens } from './tokens'
-export { lightTheme } from './themes'
+export { lightTheme, darkTheme } from './themes'
 
 // Re-export constants for non-Tamagui contexts (e.g., Expo Router header config)
 export const expiria = {
@@ -19,6 +19,22 @@ export const expiria = {
     statusYellowText: '#7A6118',
     statusRedBg: '#F8D7DA',
     statusRedText: '#8B3A3A',
+  },
+  darkColors: {
+    canvas: '#1A1E1B',
+    primaryInk: '#C8D8C8',
+    primarySurface: '#2A3A2E',
+    secondarySurface: '#2C2824',
+    accent: '#D4956E',
+    text: '#C8D8C8',
+    textMuted: '#8A9B8A',
+    border: '#3A4A3E',
+    statusGreenBg: '#1E3A1E',
+    statusGreenText: '#7BC67B',
+    statusYellowBg: '#3A3218',
+    statusYellowText: '#D4B44A',
+    statusRedBg: '#3A1E1E',
+    statusRedText: '#E08080',
   },
   spacing: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48 },
   borderRadius: { sm: 8, md: 16, lg: 24, full: 9999 },

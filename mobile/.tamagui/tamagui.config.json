@@ -25651,6 +25651,104 @@
           "val": "#8B3A3A",
           "variable": ""
         },
+        "darkCanvas": {
+          "isVar": true,
+          "key": "$darkCanvas",
+          "name": "c-darkCanvas",
+          "val": "#1A1E1B",
+          "variable": ""
+        },
+        "darkPrimaryInk": {
+          "isVar": true,
+          "key": "$darkPrimaryInk",
+          "name": "c-darkPrimaryInk",
+          "val": "#C8D8C8",
+          "variable": ""
+        },
+        "darkPrimarySurface": {
+          "isVar": true,
+          "key": "$darkPrimarySurface",
+          "name": "c-darkPrimarySurface",
+          "val": "#2A3A2E",
+          "variable": ""
+        },
+        "darkSecondarySurface": {
+          "isVar": true,
+          "key": "$darkSecondarySurface",
+          "name": "c-darkSecondarySurface",
+          "val": "#2C2824",
+          "variable": ""
+        },
+        "darkAccent": {
+          "isVar": true,
+          "key": "$darkAccent",
+          "name": "c-darkAccent",
+          "val": "#D4956E",
+          "variable": ""
+        },
+        "darkText": {
+          "isVar": true,
+          "key": "$darkText",
+          "name": "c-darkText",
+          "val": "#C8D8C8",
+          "variable": ""
+        },
+        "darkTextMuted": {
+          "isVar": true,
+          "key": "$darkTextMuted",
+          "name": "c-darkTextMuted",
+          "val": "#8A9B8A",
+          "variable": ""
+        },
+        "darkBorder": {
+          "isVar": true,
+          "key": "$darkBorder",
+          "name": "c-darkBorder",
+          "val": "#3A4A3E",
+          "variable": ""
+        },
+        "darkStatusGreenBg": {
+          "isVar": true,
+          "key": "$darkStatusGreenBg",
+          "name": "c-darkStatusGreenBg",
+          "val": "#1E3A1E",
+          "variable": ""
+        },
+        "darkStatusGreenText": {
+          "isVar": true,
+          "key": "$darkStatusGreenText",
+          "name": "c-darkStatusGreenText",
+          "val": "#7BC67B",
+          "variable": ""
+        },
+        "darkStatusYellowBg": {
+          "isVar": true,
+          "key": "$darkStatusYellowBg",
+          "name": "c-darkStatusYellowBg",
+          "val": "#3A3218",
+          "variable": ""
+        },
+        "darkStatusYellowText": {
+          "isVar": true,
+          "key": "$darkStatusYellowText",
+          "name": "c-darkStatusYellowText",
+          "val": "#D4B44A",
+          "variable": ""
+        },
+        "darkStatusRedBg": {
+          "isVar": true,
+          "key": "$darkStatusRedBg",
+          "name": "c-darkStatusRedBg",
+          "val": "#3A1E1E",
+          "variable": ""
+        },
+        "darkStatusRedText": {
+          "isVar": true,
+          "key": "$darkStatusRedText",
+          "name": "c-darkStatusRedText",
+          "val": "#E08080",
+          "variable": ""
+        },
         "white": {
           "isVar": true,
           "key": "$white",
@@ -25674,6 +25772,13 @@
         }
       },
       "space": {
+        "true": {
+          "isVar": true,
+          "key": "$true",
+          "name": "t-space-true",
+          "val": 16,
+          "variable": ""
+        },
         "xs": {
           "isVar": true,
           "key": "$xs",
@@ -25718,6 +25823,13 @@
         }
       },
       "size": {
+        "true": {
+          "isVar": true,
+          "key": "$true",
+          "name": "t-size-true",
+          "val": 16,
+          "variable": ""
+        },
         "xs": {
           "isVar": true,
           "key": "$xs",
@@ -25762,6 +25874,13 @@
         }
       },
       "radius": {
+        "true": {
+          "isVar": true,
+          "key": "$true",
+          "name": "t-radius-true",
+          "val": 16,
+          "variable": ""
+        },
         "sm": {
           "isVar": true,
           "key": "$sm",
@@ -25792,6 +25911,13 @@
         }
       },
       "zIndex": {
+        "true": {
+          "isVar": true,
+          "key": "$true",
+          "name": "t-zIndex-true",
+          "val": 0,
+          "variable": ""
+        },
         "base": {
           "isVar": true,
           "key": "$base",
@@ -25809,6 +25935,48 @@
       }
     },
     "themes": {
+      "dark": {
+        "primaryInk": "#2E4C38",
+        "primarySurface": "#A8BFA8",
+        "secondarySurface": "#FAF0E6",
+        "accent": "#C07850",
+        "canvas": "#FDFCFA",
+        "text": "#2E4C38",
+        "textMuted": "#7A8B7A",
+        "border": "#D4DDD4",
+        "statusGreenBg": "#DFF0D8",
+        "statusGreenText": "#3B6E3B",
+        "statusYellowBg": "#FFF3CD",
+        "statusYellowText": "#7A6118",
+        "statusRedBg": "#F8D7DA",
+        "statusRedText": "#8B3A3A",
+        "darkCanvas": "#1A1E1B",
+        "darkPrimaryInk": "#C8D8C8",
+        "darkPrimarySurface": "#2A3A2E",
+        "darkSecondarySurface": "#2C2824",
+        "darkAccent": "#D4956E",
+        "darkText": "#C8D8C8",
+        "darkTextMuted": "#8A9B8A",
+        "darkBorder": "#3A4A3E",
+        "darkStatusGreenBg": "#1E3A1E",
+        "darkStatusGreenText": "#7BC67B",
+        "darkStatusYellowBg": "#3A3218",
+        "darkStatusYellowText": "#D4B44A",
+        "darkStatusRedBg": "#3A1E1E",
+        "darkStatusRedText": "#E08080",
+        "white": "#FFFFFF",
+        "black": "#000000",
+        "overlay": "rgba(0,0,0,0.5)",
+        "background": "$darkCanvas",
+        "color": "$darkText",
+        "borderColor": "$darkBorder",
+        "cardBackground": "$darkSecondarySurface",
+        "primaryAction": "$darkPrimaryInk",
+        "accentAction": "$darkAccent",
+        "mutedText": "$darkTextMuted",
+        "surfaceFill": "$darkPrimarySurface",
+        "id": "dark"
+      },
       "light": {
         "primaryInk": "#2E4C38",
         "primarySurface": "#A8BFA8",
@@ -25824,6 +25992,20 @@
         "statusYellowText": "#7A6118",
         "statusRedBg": "#F8D7DA",
         "statusRedText": "#8B3A3A",
+        "darkCanvas": "#1A1E1B",
+        "darkPrimaryInk": "#C8D8C8",
+        "darkPrimarySurface": "#2A3A2E",
+        "darkSecondarySurface": "#2C2824",
+        "darkAccent": "#D4956E",
+        "darkText": "#C8D8C8",
+        "darkTextMuted": "#8A9B8A",
+        "darkBorder": "#3A4A3E",
+        "darkStatusGreenBg": "#1E3A1E",
+        "darkStatusGreenText": "#7BC67B",
+        "darkStatusYellowBg": "#3A3218",
+        "darkStatusYellowText": "#D4B44A",
+        "darkStatusRedBg": "#3A1E1E",
+        "darkStatusRedText": "#E08080",
         "white": "#FFFFFF",
         "black": "#000000",
         "overlay": "rgba(0,0,0,0.5)",
@@ -25930,6 +26112,104 @@
         "key": "$canvas",
         "name": "c-canvas",
         "val": "#FDFCFA",
+        "variable": ""
+      },
+      "$color.darkAccent": {
+        "isVar": true,
+        "key": "$darkAccent",
+        "name": "c-darkAccent",
+        "val": "#D4956E",
+        "variable": ""
+      },
+      "$color.darkBorder": {
+        "isVar": true,
+        "key": "$darkBorder",
+        "name": "c-darkBorder",
+        "val": "#3A4A3E",
+        "variable": ""
+      },
+      "$color.darkCanvas": {
+        "isVar": true,
+        "key": "$darkCanvas",
+        "name": "c-darkCanvas",
+        "val": "#1A1E1B",
+        "variable": ""
+      },
+      "$color.darkPrimaryInk": {
+        "isVar": true,
+        "key": "$darkPrimaryInk",
+        "name": "c-darkPrimaryInk",
+        "val": "#C8D8C8",
+        "variable": ""
+      },
+      "$color.darkPrimarySurface": {
+        "isVar": true,
+        "key": "$darkPrimarySurface",
+        "name": "c-darkPrimarySurface",
+        "val": "#2A3A2E",
+        "variable": ""
+      },
+      "$color.darkSecondarySurface": {
+        "isVar": true,
+        "key": "$darkSecondarySurface",
+        "name": "c-darkSecondarySurface",
+        "val": "#2C2824",
+        "variable": ""
+      },
+      "$color.darkStatusGreenBg": {
+        "isVar": true,
+        "key": "$darkStatusGreenBg",
+        "name": "c-darkStatusGreenBg",
+        "val": "#1E3A1E",
+        "variable": ""
+      },
+      "$color.darkStatusGreenText": {
+        "isVar": true,
+        "key": "$darkStatusGreenText",
+        "name": "c-darkStatusGreenText",
+        "val": "#7BC67B",
+        "variable": ""
+      },
+      "$color.darkStatusRedBg": {
+        "isVar": true,
+        "key": "$darkStatusRedBg",
+        "name": "c-darkStatusRedBg",
+        "val": "#3A1E1E",
+        "variable": ""
+      },
+      "$color.darkStatusRedText": {
+        "isVar": true,
+        "key": "$darkStatusRedText",
+        "name": "c-darkStatusRedText",
+        "val": "#E08080",
+        "variable": ""
+      },
+      "$color.darkStatusYellowBg": {
+        "isVar": true,
+        "key": "$darkStatusYellowBg",
+        "name": "c-darkStatusYellowBg",
+        "val": "#3A3218",
+        "variable": ""
+      },
+      "$color.darkStatusYellowText": {
+        "isVar": true,
+        "key": "$darkStatusYellowText",
+        "name": "c-darkStatusYellowText",
+        "val": "#D4B44A",
+        "variable": ""
+      },
+      "$color.darkText": {
+        "isVar": true,
+        "key": "$darkText",
+        "name": "c-darkText",
+        "val": "#C8D8C8",
+        "variable": ""
+      },
+      "$color.darkTextMuted": {
+        "isVar": true,
+        "key": "$darkTextMuted",
+        "name": "c-darkTextMuted",
+        "val": "#8A9B8A",
         "variable": ""
       },
       "$color.overlay": {
@@ -26051,6 +26331,13 @@
         "val": 8,
         "variable": ""
       },
+      "$radius.true": {
+        "isVar": true,
+        "key": "$true",
+        "name": "t-radius-true",
+        "val": 16,
+        "variable": ""
+      },
       "$size.lg": {
         "isVar": true,
         "key": "$lg",
@@ -26070,6 +26357,13 @@
         "key": "$sm",
         "name": "t-size-sm",
         "val": 8,
+        "variable": ""
+      },
+      "$size.true": {
+        "isVar": true,
+        "key": "$true",
+        "name": "t-size-true",
+        "val": 16,
         "variable": ""
       },
       "$size.xl": {
@@ -26114,6 +26408,13 @@
         "val": 8,
         "variable": ""
       },
+      "$space.true": {
+        "isVar": true,
+        "key": "$true",
+        "name": "t-space-true",
+        "val": 16,
+        "variable": ""
+      },
       "$space.xl": {
         "isVar": true,
         "key": "$xl",
@@ -26147,6 +26448,13 @@
         "key": "$overlay",
         "name": "t-zIndex-overlay",
         "val": 1000,
+        "variable": ""
+      },
+      "$zIndex.true": {
+        "isVar": true,
+        "key": "$true",
+        "name": "t-zIndex-true",
+        "val": 0,
         "variable": ""
       }
     },

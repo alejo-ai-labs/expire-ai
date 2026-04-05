@@ -20,11 +20,13 @@ import { CameraError } from '../../hooks/useCamera';
 import { formatDate, calculateDaysUntilExpiration, getTrafficLightStatus } from '../../utils/dateUtils';
 import * as api from '../../services/api';
 import { expiria } from '../../theme';
+import { useThemeColors } from '../../context/ThemeContext';
 
 export default function FoodDetailScreen() {
     const { id } = useLocalSearchParams<{ id: string }>();
     const router = useRouter();
     const { items, isLoading, updateItem, deleteItem } = useFoodItems();
+    const colors = useThemeColors();
 
     const [showLabelScanner, setShowLabelScanner] = useState(false);
     const [isProcessingLabel, setIsProcessingLabel] = useState(false);
@@ -151,7 +153,7 @@ export default function FoodDetailScreen() {
     // Loading state
     if (isLoading) {
         return (
-            <SafeAreaView style={styles.container} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
                 <LoadingSpinner message="Loading item details..." />
             </SafeAreaView>
         );
@@ -160,15 +162,15 @@ export default function FoodDetailScreen() {
     // Item not found
     if (!item) {
         return (
-            <SafeAreaView style={styles.container} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
                 <View style={styles.notFoundContainer}>
-                    <Ionicons name="alert-circle-outline" size={64} color={expiria.colors.textMuted} />
-                    <Text style={styles.notFoundTitle}>Item Not Found</Text>
-                    <Text style={styles.notFoundText}>
+                    <Ionicons name="alert-circle-outline" size={64} color={colors.textMuted} />
+                    <Text style={[styles.notFoundTitle, { color: colors.primaryInk }]}>Item Not Found</Text>
+                    <Text style={[styles.notFoundText, { color: colors.textMuted }]}>
                         This food item may have been deleted.
                     </Text>
-                    <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-                        <Text style={styles.backButtonText}>Go Back</Text>
+                    <TouchableOpacity style={[styles.backButton, { backgroundColor: colors.primaryInk }]} onPress={() => router.back()}>
+                        <Text style={[styles.backButtonText, { color: colors.canvas }]}>Go Back</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
@@ -179,36 +181,36 @@ export default function FoodDetailScreen() {
     const status = getTrafficLightStatus(daysUntilExpiration);
 
     return (
-        <SafeAreaView style={styles.container} edges={['bottom']}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
             <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
                 {/* Item Name */}
                 <View style={styles.header}>
-                    <Text style={styles.itemName}>{item.name}</Text>
+                    <Text style={[styles.itemName, { color: colors.primaryInk }]}>{item.name}</Text>
                     <ExpirationBadge status={status} daysUntilExpiration={daysUntilExpiration} />
                 </View>
 
                 {/* Info Cards */}
                 <View style={styles.infoSection}>
-                    <View style={styles.infoCard}>
-                        <Ionicons name="cart-outline" size={24} color={expiria.colors.primaryInk} />
+                    <View style={[styles.infoCard, { backgroundColor: colors.secondarySurface }]}>
+                        <Ionicons name="cart-outline" size={24} color={colors.primaryInk} />
                         <View style={styles.infoContent}>
-                            <Text style={styles.infoLabel}>Purchase Date</Text>
-                            <Text style={styles.infoValue}>{formatDate(item.purchaseDate)}</Text>
+                            <Text style={[styles.infoLabel, { color: colors.textMuted }]}>Purchase Date</Text>
+                            <Text style={[styles.infoValue, { color: colors.primaryInk }]}>{formatDate(item.purchaseDate)}</Text>
                         </View>
                     </View>
 
-                    <View style={styles.infoCard}>
-                        <Ionicons name="calendar-outline" size={24} color={expiria.colors.primaryInk} />
+                    <View style={[styles.infoCard, { backgroundColor: colors.secondarySurface }]}>
+                        <Ionicons name="calendar-outline" size={24} color={colors.primaryInk} />
                         <View style={styles.infoContent}>
-                            <Text style={styles.infoLabel}>Added On</Text>
-                            <Text style={styles.infoValue}>{formatDate(item.createdAt)}</Text>
+                            <Text style={[styles.infoLabel, { color: colors.textMuted }]}>Added On</Text>
+                            <Text style={[styles.infoValue, { color: colors.primaryInk }]}>{formatDate(item.createdAt)}</Text>
                         </View>
                     </View>
 
                     {item.isEstimated && (
-                        <View style={styles.estimatedBanner}>
-                            <Ionicons name="information-circle-outline" size={20} color={expiria.colors.statusYellowText} />
-                            <Text style={styles.estimatedText}>
+                        <View style={[styles.estimatedBanner, { backgroundColor: colors.statusYellowBg }]}>
+                            <Ionicons name="information-circle-outline" size={20} color={colors.statusYellowText} />
+                            <Text style={[styles.estimatedText, { color: colors.statusYellowText }]}>
                                 Expiration date is an AI estimate. Scan the label or edit manually for accuracy.
                             </Text>
                         </View>
@@ -217,7 +219,7 @@ export default function FoodDetailScreen() {
 
                 {/* Expiration Date Editor */}
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Expiration Date</Text>
+                    <Text style={[styles.sectionTitle, { color: colors.primaryInk }]}>Expiration Date</Text>
                     <DatePicker
                         value={expirationDate}
                         onChange={handleDateChange}
@@ -225,27 +227,27 @@ export default function FoodDetailScreen() {
                     />
 
                     <TouchableOpacity
-                        style={styles.scanLabelButton}
+                        style={[styles.scanLabelButton, { backgroundColor: colors.canvas, borderColor: colors.primaryInk }]}
                         onPress={() => setShowLabelScanner(true)}
                     >
-                        <Ionicons name="camera-outline" size={20} color={expiria.colors.primaryInk} />
-                        <Text style={styles.scanLabelText}>Scan Product Label</Text>
+                        <Ionicons name="camera-outline" size={20} color={colors.primaryInk} />
+                        <Text style={[styles.scanLabelText, { color: colors.primaryInk }]}>Scan Product Label</Text>
                     </TouchableOpacity>
                 </View>
 
                 {/* Save Button */}
                 {hasChanges && (
                     <TouchableOpacity
-                        style={[styles.saveButton, isSaving && styles.saveButtonDisabled]}
+                        style={[styles.saveButton, { backgroundColor: colors.primaryInk }, isSaving && { backgroundColor: colors.textMuted }]}
                         onPress={handleSave}
                         disabled={isSaving}
                     >
                         {isSaving ? (
-                            <Text style={styles.saveButtonText}>Saving...</Text>
+                            <Text style={[styles.saveButtonText, { color: colors.canvas }]}>Saving...</Text>
                         ) : (
                             <>
-                                <Ionicons name="checkmark" size={20} color={expiria.colors.canvas} />
-                                <Text style={styles.saveButtonText}>Save Changes</Text>
+                                <Ionicons name="checkmark" size={20} color={colors.canvas} />
+                                <Text style={[styles.saveButtonText, { color: colors.canvas }]}>Save Changes</Text>
                             </>
                         )}
                     </TouchableOpacity>
@@ -253,10 +255,10 @@ export default function FoodDetailScreen() {
             </ScrollView>
 
             {/* Delete Button */}
-            <View style={styles.bottomActions}>
-                <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-                    <Ionicons name="trash-outline" size={20} color={expiria.colors.statusRedText} />
-                    <Text style={styles.deleteButtonText}>Delete Item</Text>
+            <View style={[styles.bottomActions, { borderTopColor: colors.border, backgroundColor: colors.secondarySurface }]}>
+                <TouchableOpacity style={[styles.deleteButton, { backgroundColor: colors.statusRedBg, borderColor: colors.statusRedBg }]} onPress={handleDelete}>
+                    <Ionicons name="trash-outline" size={20} color={colors.statusRedText} />
+                    <Text style={[styles.deleteButtonText, { color: colors.statusRedText }]}>Delete Item</Text>
                 </TouchableOpacity>
             </View>
 
@@ -286,7 +288,6 @@ export default function FoodDetailScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: expiria.colors.primarySurface,
     },
     scrollView: {
         flex: 1,
@@ -303,7 +304,6 @@ const styles = StyleSheet.create({
     itemName: {
         fontSize: expiria.typography.sizes.heading,
         fontWeight: expiria.typography.weights.bold,
-        color: expiria.colors.primaryInk,
         flex: 1,
         marginRight: expiria.spacing.sm + 4,
     },
@@ -313,7 +313,6 @@ const styles = StyleSheet.create({
     infoCard: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: expiria.colors.secondarySurface,
         borderRadius: expiria.borderRadius.sm + 4,
         padding: expiria.spacing.md,
         marginBottom: expiria.spacing.sm + 4,
@@ -324,18 +323,15 @@ const styles = StyleSheet.create({
     },
     infoLabel: {
         fontSize: expiria.typography.sizes.small + 1,
-        color: expiria.colors.textMuted,
         marginBottom: 2,
     },
     infoValue: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
     },
     estimatedBanner: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        backgroundColor: expiria.colors.statusYellowBg,
         borderRadius: expiria.borderRadius.sm,
         padding: expiria.spacing.sm + 4,
         gap: expiria.spacing.sm,
@@ -343,7 +339,6 @@ const styles = StyleSheet.create({
     estimatedText: {
         flex: 1,
         fontSize: expiria.typography.sizes.caption,
-        color: expiria.colors.statusYellowText,
         lineHeight: 18,
     },
     section: {
@@ -352,16 +347,13 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: expiria.typography.sizes.subheading - 2,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
         marginBottom: expiria.spacing.sm + 4,
     },
     scanLabelButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: expiria.colors.canvas,
         borderWidth: expiria.strokes.thin,
-        borderColor: expiria.colors.primaryInk,
         borderRadius: expiria.borderRadius.sm,
         paddingVertical: expiria.spacing.sm + 4,
         gap: expiria.spacing.sm,
@@ -369,38 +361,28 @@ const styles = StyleSheet.create({
     scanLabelText: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.medium,
-        color: expiria.colors.primaryInk,
     },
     saveButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: expiria.colors.primaryInk,
         borderRadius: expiria.borderRadius.sm,
         paddingVertical: expiria.spacing.sm + 6,
         gap: expiria.spacing.sm,
     },
-    saveButtonDisabled: {
-        backgroundColor: expiria.colors.textMuted,
-    },
     saveButtonText: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.canvas,
     },
     bottomActions: {
         padding: expiria.spacing.md,
         borderTopWidth: expiria.strokes.thin,
-        borderTopColor: expiria.colors.border,
-        backgroundColor: expiria.colors.secondarySurface,
     },
     deleteButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: expiria.colors.statusRedBg,
         borderWidth: expiria.strokes.thin,
-        borderColor: expiria.colors.statusRedBg,
         borderRadius: expiria.borderRadius.sm,
         paddingVertical: expiria.spacing.sm + 4,
         gap: expiria.spacing.sm,
@@ -408,7 +390,6 @@ const styles = StyleSheet.create({
     deleteButtonText: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.medium,
-        color: expiria.colors.statusRedText,
     },
     notFoundContainer: {
         flex: 1,
@@ -419,12 +400,10 @@ const styles = StyleSheet.create({
     notFoundTitle: {
         fontSize: expiria.typography.sizes.subheading,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
         marginTop: expiria.spacing.md,
     },
     notFoundText: {
         fontSize: 14,
-        color: expiria.colors.textMuted,
         textAlign: 'center',
         marginTop: expiria.spacing.sm,
     },
@@ -432,13 +411,11 @@ const styles = StyleSheet.create({
         marginTop: expiria.spacing.lg,
         paddingHorizontal: expiria.spacing.lg,
         paddingVertical: expiria.spacing.sm + 4,
-        backgroundColor: expiria.colors.primaryInk,
         borderRadius: expiria.borderRadius.sm,
     },
     backButtonText: {
         fontSize: expiria.typography.sizes.body,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.canvas,
     },
     processingContainer: {
         flex: 1,

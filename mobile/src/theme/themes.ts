@@ -9,3 +9,15 @@ export const lightTheme = {
   mutedText: '$textMuted',
   surfaceFill: '$primarySurface',
 }
+
+export const darkTheme = {
+  background: '$darkCanvas',
+  color: '$darkText',
+  borderColor: '$darkBorder',
+  // Semantic aliases
+  cardBackground: '$darkSecondarySurface',
+  primaryAction: '$darkPrimaryInk',
+  accentAction: '$darkAccent',
+  mutedText: '$darkTextMuted',
+  surfaceFill: '$darkPrimarySurface',
+}

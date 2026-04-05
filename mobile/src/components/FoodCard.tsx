@@ -5,6 +5,7 @@ import { TrafficLightStatus } from '../types';
 import { formatDate } from '../utils/dateUtils';
 import { ExpirationBadge } from './ExpirationBadge';
 import { expiria } from '../theme';
+import { useThemeColors } from '../context/ThemeContext';
 
 interface FoodCardProps {
     id: string;
@@ -28,11 +29,17 @@ export function FoodCard({
     onPress,
     onDelete,
 }: FoodCardProps) {
+    const colors = useThemeColors();
+
     return (
-        <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
+        <TouchableOpacity
+            style={[styles.card, { backgroundColor: colors.secondarySurface }]}
+            onPress={onPress}
+            activeOpacity={0.7}
+        >
             <View style={styles.content}>
                 <View style={styles.header}>
-                    <Text style={styles.name} numberOfLines={1}>
+                    <Text style={[styles.name, { color: colors.primaryInk }]} numberOfLines={1}>
                         {name}
                     </Text>
                     <Pressable
@@ -43,21 +50,21 @@ export function FoodCard({
                         }}
                         hitSlop={8}
                     >
-                        <Ionicons name="trash-outline" size={20} color={expiria.colors.textMuted} />
+                        <Ionicons name="trash-outline" size={20} color={colors.textMuted} />
                     </Pressable>
                 </View>
 
                 <View style={styles.dates}>
                     <View style={styles.dateRow}>
-                        <Text style={styles.dateLabel}>Purchased:</Text>
-                        <Text style={styles.dateValue}>{formatDate(purchaseDate)}</Text>
+                        <Text style={[styles.dateLabel, { color: colors.textMuted }]}>Purchased:</Text>
+                        <Text style={[styles.dateValue, { color: colors.primaryInk }]}>{formatDate(purchaseDate)}</Text>
                     </View>
                     <View style={styles.dateRow}>
-                        <Text style={styles.dateLabel}>Expires:</Text>
-                        <Text style={styles.dateValue}>{formatDate(expirationDate)}</Text>
+                        <Text style={[styles.dateLabel, { color: colors.textMuted }]}>Expires:</Text>
+                        <Text style={[styles.dateValue, { color: colors.primaryInk }]}>{formatDate(expirationDate)}</Text>
                         {isEstimated && (
-                            <View style={styles.estimatedBadge}>
-                                <Text style={styles.estimatedText}>Est.</Text>
+                            <View style={[styles.estimatedBadge, { backgroundColor: colors.border }]}>
+                                <Text style={[styles.estimatedText, { color: colors.textMuted }]}>Est.</Text>
                             </View>
                         )}
                     </View>
@@ -74,7 +81,6 @@ export function FoodCard({
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: expiria.colors.secondarySurface,
         borderRadius: expiria.borderRadius.lg,
         marginHorizontal: expiria.spacing.md,
         marginVertical: expiria.spacing.xs + 2,
@@ -92,7 +98,6 @@ const styles = StyleSheet.create({
     name: {
         fontSize: expiria.typography.sizes.subheading - 2,
         fontWeight: expiria.typography.weights.semibold,
-        color: expiria.colors.primaryInk,
         flex: 1,
         marginRight: expiria.spacing.sm,
     },
@@ -109,16 +114,13 @@ const styles = StyleSheet.create({
     },
     dateLabel: {
         fontSize: expiria.typography.sizes.caption + 1,
-        color: expiria.colors.textMuted,
         width: 80,
     },
     dateValue: {
         fontSize: expiria.typography.sizes.caption + 1,
-        color: expiria.colors.primaryInk,
         fontWeight: expiria.typography.weights.medium,
     },
     estimatedBadge: {
-        backgroundColor: expiria.colors.border,
         paddingHorizontal: expiria.spacing.xs + 2,
         paddingVertical: 2,
         borderRadius: expiria.borderRadius.sm / 2,
@@ -126,7 +128,6 @@ const styles = StyleSheet.create({
     },
     estimatedText: {
         fontSize: expiria.typography.sizes.small,
-        color: expiria.colors.textMuted,
         fontWeight: expiria.typography.weights.medium,
     },
     footer: {

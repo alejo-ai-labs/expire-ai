@@ -47,6 +47,17 @@ export interface FoodItemWithStatus extends FoodItem {
     daysUntilExpiration: number;
 }
 
+export interface UserProfile {
+    name: string;
+    lastName: string;
+    email: string;
+    birthday: string; // ISO date string (YYYY-MM-DD)
+    weight: number;
+    height: number;
+    gender: string;
+    country: string;
+}
+
 export interface ApiError {
     code: string;
     message: string;

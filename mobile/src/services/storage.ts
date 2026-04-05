@@ -4,13 +4,15 @@
  */
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FoodItem, CreateFoodItemInput, UpdateFoodItemInput } from '../types';
+import { FoodItem, CreateFoodItemInput, UpdateFoodItemInput, UserProfile } from '../types';
 
 // Storage keys
 const STORAGE_KEYS = {
     FOOD_ITEMS_CACHE: '@FoodTracker:foodItems',
     OFFLINE_QUEUE: '@FoodTracker:offlineQueue',
     LAST_SYNC: '@FoodTracker:lastSync',
+    THEME_PREFERENCE: '@Expiria:themePreference',
+    USER_PROFILE: '@Expiria:userProfile',
 };
 
 // Types for offline operations
@@ -167,6 +169,79 @@ export async function hasPendingOperations(): Promise<boolean> {
 export async function getPendingOperationsCount(): Promise<number> {
     const queue = await getOfflineQueue();
     return queue.length;
+}
+
+// ============================================
+// Theme Preference
+// ============================================
+
+/**
+ * Get the stored theme preference
+ */
+export async function getThemePreference(): Promise<'light' | 'dark' | null> {
+    try {
+        const value = await AsyncStorage.getItem(STORAGE_KEYS.THEME_PREFERENCE);
+        if (value === 'light' || value === 'dark') {
+            return value;
+        }
+        return null;
+    } catch (error) {
+        console.error('Failed to get theme preference:', error);
+        return null;
+    }
+}
+
+/**
+ * Persist the theme preference
+ */
+export async function setThemePreference(mode: 'light' | 'dark'): Promise<void> {
+    try {
+        await AsyncStorage.setItem(STORAGE_KEYS.THEME_PREFERENCE, mode);
+    } catch (error) {
+        console.error('Failed to set theme preference:', error);
+    }
+}
+
+// ============================================
+// User Profile
+// ============================================
+
+/**
+ * Get the stored user profile
+ */
+export async function getUserProfile(): Promise<UserProfile | null> {
+    try {
+        const value = await AsyncStorage.getItem(STORAGE_KEYS.USER_PROFILE);
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error('Failed to get user profile:', error);
+        return null;
+    }
+}
+
+/**
+ * Persist the user profile
+ */
+export async function setUserProfile(profile: UserProfile): Promise<void> {
+    try {
+        await AsyncStorage.setItem(
+            STORAGE_KEYS.USER_PROFILE,
+            JSON.stringify(profile)
+        );
+    } catch (error) {
+        console.error('Failed to set user profile:', error);
+    }
+}
+
+/**
+ * Remove the stored user profile
+ */
+export async function clearUserProfile(): Promise<void> {
+    try {
+        await AsyncStorage.removeItem(STORAGE_KEYS.USER_PROFILE);
+    } catch (error) {
+        console.error('Failed to clear user profile:', error);
+    }
 }
 
 // ============================================

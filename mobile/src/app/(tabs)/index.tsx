@@ -6,10 +6,11 @@ import { FoodCardList } from '../../components/FoodCardList';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { OfflineIndicator } from '../../components/OfflineIndicator';
 import { useFoodItems } from '../../hooks/useFoodItems';
-import { expiria } from '../../theme';
+import { useThemeColors } from '../../context/ThemeContext';
 
 export default function HomeScreen() {
     const router = useRouter();
+    const colors = useThemeColors();
     const { items, isLoading, error, refresh, deleteItem, isOffline, pendingOperations } = useFoodItems();
 
     // Navigate to food detail screen
@@ -42,7 +43,7 @@ export default function HomeScreen() {
     // Loading state
     if (isLoading) {
         return (
-            <SafeAreaView style={styles.container} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
                 <LoadingSpinner message="Loading your food items..." />
             </SafeAreaView>
         );
@@ -51,16 +52,16 @@ export default function HomeScreen() {
     // Error state
     if (error) {
         return (
-            <SafeAreaView style={styles.container} edges={['bottom']}>
+            <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
                 <View style={styles.errorContainer}>
-                    <Text style={styles.errorText}>{error}</Text>
+                    <Text style={[styles.errorText, { color: colors.statusRedText }]}>{error}</Text>
                 </View>
             </SafeAreaView>
         );
     }
 
     return (
-        <SafeAreaView style={styles.container} edges={['bottom']}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.primarySurface }]} edges={['bottom']}>
             <OfflineIndicator pendingCount={pendingOperations} />
             <FoodCardList
                 items={items}
@@ -77,7 +78,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: expiria.colors.primarySurface,
     },
     errorContainer: {
         flex: 1,
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     },
     errorText: {
         fontSize: 16,
-        color: expiria.colors.statusRedText,
         textAlign: 'center',
     },
 });

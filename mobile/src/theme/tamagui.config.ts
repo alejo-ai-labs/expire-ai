@@ -1,12 +1,13 @@
 import { createTamagui } from 'tamagui'
 import { createInterFont } from '@tamagui/font-inter'
 import { tokens } from './tokens'
-import { lightTheme } from './themes'
+import { lightTheme, darkTheme } from './themes'
 
 const config = createTamagui({
   tokens,
   themes: {
     light: lightTheme,
+    dark: darkTheme,
   },
   fonts: {
     heading: createInterFont({ weight: { 6: '600', 7: '700' } }),

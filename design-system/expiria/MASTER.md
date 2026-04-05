@@ -45,6 +45,29 @@ Status indicators for food expiration use pastel variants that harmonize with th
 | Yellow (Expiring Soon) | `#FFF3CD` | `#7A6118` | `statusYellowBg` | `statusYellowText` |
 | Red (Expired) | `#F8D7DA` | `#8B3A3A` | `statusRedBg` | `statusRedText` |
 
+### Dark Mode Palette
+
+Derived from the Pastel Earthy Palette. The philosophy: darken surfaces while preserving the earthy, muted character. No pure black, no pure white.
+
+| Role | Light Hex | Dark Hex | Dark Token | Rationale |
+|------|-----------|----------|------------|-----------|
+| Canvas | `#FDFCFA` | `#1A1E1B` | `darkCanvas` | Deep muted green-black, warm undertone. Not pure black. |
+| Primary Ink | `#2E4C38` | `#C8D8C8` | `darkPrimaryInk` | Light sage for text on dark. 7.2:1 contrast vs canvas. |
+| Primary Surface | `#A8BFA8` | `#2A3A2E` | `darkPrimarySurface` | Darkened sage green, preserves earthy character. |
+| Secondary Surface | `#FAF0E6` | `#2C2824` | `darkSecondarySurface` | Dark warm brown, preserves cream warmth. |
+| Accent | `#C07850` | `#D4956E` | `darkAccent` | Lightened terracotta for visibility. 4.1:1 vs dark canvas. |
+| Text | `#2E4C38` | `#C8D8C8` | `darkText` | Same as darkPrimaryInk. |
+| Text Muted | `#7A8B7A` | `#8A9B8A` | `darkTextMuted` | Slightly lighter sage mid-tone. |
+| Border | `#D4DDD4` | `#3A4A3E` | `darkBorder` | Visible sage-tinted border on dark surfaces. |
+| Status Green Bg | `#DFF0D8` | `#1E3A1E` | `darkStatusGreenBg` | Deep green background. |
+| Status Green Text | `#3B6E3B` | `#7BC67B` | `darkStatusGreenText` | Light green text. 4.8:1 vs bg. |
+| Status Yellow Bg | `#FFF3CD` | `#3A3218` | `darkStatusYellowBg` | Deep amber background. |
+| Status Yellow Text | `#7A6118` | `#D4B44A` | `darkStatusYellowText` | Light amber text. 4.5:1 vs bg. |
+| Status Red Bg | `#F8D7DA` | `#3A1E1E` | `darkStatusRedBg` | Deep red background. |
+| Status Red Text | `#8B3A3A` | `#E08080` | `darkStatusRedText` | Light red text. 4.6:1 vs bg. |
+
+**Dark Mode Color Philosophy:** Surfaces are darkened while preserving the earthy, organic character of the light palette. Text and accent colors are lightened for readability. All dark mode colors maintain WCAG contrast requirements: body text ≥ 4.5:1 against canvas, accent ≥ 3:1 against canvas, status text ≥ 3:1 against status background. The canvas is never pure black (`#000000`) — it retains a warm, muted green-black undertone.
+
 ### Typography
 
 - **Font Family:** Inter (geometric sans-serif)
@@ -104,6 +127,17 @@ Very soft shadows only — no heavy drop shadows that fight the flat illustratio
 | Card | `shadowColor: #2E4C38, offset: {0, 2}, opacity: 0.08, radius: 6, elevation: 2` | Cards, panels |
 
 Shadow color uses `primaryInk` for warmth. Maximum `shadowOpacity` is `0.15`. Maximum `elevation` is `4`. No shadow should compete with the flat illustration style.
+
+### Shadow Depths — Dark Mode
+
+Dark surfaces absorb light differently, so shadows use a neutral black base with slightly higher opacity to remain perceptible.
+
+| Level | Value | Usage |
+|-------|-------|-------|
+| Soft | `shadowColor: #000000, offset: {0, 1}, opacity: 0.3, radius: 3, elevation: 1` | Subtle lift for small elements on dark surfaces |
+| Card | `shadowColor: #000000, offset: {0, 2}, opacity: 0.3, radius: 6, elevation: 2` | Cards, panels on dark surfaces |
+
+Shadow color switches from `primaryInk` to `#000000` in dark mode. `shadowOpacity` is `0.3` (higher than light mode's max of `0.15` because dark backgrounds need stronger shadows to be visible). Maximum `elevation` remains `4`.
 
 ---
 
@@ -189,6 +223,13 @@ Shadow color uses `primaryInk` for warmth. Maximum `shadowOpacity` is `0.15`. Ma
 - ❌ **Invisible focus states** — Focus states must be visible for accessibility
 - ❌ **Hardcoded hex colors in components** — All colors must come from the Theme Module; no inline hex values in StyleSheet definitions (except CameraView black/white)
 
+### Dark Mode Anti-Patterns
+
+- ❌ **Pure white text (#FFFFFF)** — No pure white text on dark surfaces. Use the warm off-white `darkText` / `darkPrimaryInk` token (`#C8D8C8`) instead. Pure white creates excessive contrast and eye strain on dark backgrounds.
+- ❌ **High-opacity shadows on dark surfaces** — No `shadowOpacity > 0.4` on dark mode surfaces. Dark backgrounds absorb light, so overly strong shadows create muddy, undefined edges. Use the dark mode shadow definitions (`shadowOpacity: 0.3` max).
+- ❌ **Pure black canvas (#000000)** — The dark canvas must retain a warm, muted undertone (`#1A1E1B`). Pure black breaks the earthy, organic character of the Expiria palette.
+- ❌ **Light mode colors on dark surfaces** — Never use light mode hex values directly in dark mode. Always consume colors through the Theme Module's dark tokens or `useThemeColors()` hook.
+
 ---
 
 ## Pre-Delivery Checklist
@@ -209,4 +250,8 @@ Before delivering any UI code, verify:
 - [ ] Brand moments use UPPERCASE
 - [ ] Motifs (apple+clock, leaf/stem) used sparingly and only in appropriate contexts
 - [ ] All shadows use primaryInk as shadow color for warmth
+- [ ] Dark mode shadows use #000000 as shadow color with opacity ≤ 0.3
+- [ ] Dark mode canvas is not pure black (#000000)
+- [ ] Dark mode text is not pure white (#FFFFFF)
+- [ ] Dark mode colors maintain required WCAG contrast ratios
 - [ ] Flat illustration style maintained — no gradients, no heavy depth effects

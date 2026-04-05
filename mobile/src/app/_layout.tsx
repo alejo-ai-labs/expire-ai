@@ -4,25 +4,29 @@ import { StatusBar } from 'expo-status-bar'
 import { TamaguiProvider } from 'tamagui'
 import { tamaguiConfig, expiria } from '../theme'
 import { useNotifications } from '../hooks/useNotifications'
+import { ThemeProvider, useThemeMode, useThemeColors } from '../context/ThemeContext'
 
-export default function RootLayout() {
+function RootLayoutInner() {
   useNotifications()
 
+  const { mode } = useThemeMode()
+  const colors = useThemeColors()
+
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={mode}>
       <SafeAreaProvider>
-        <StatusBar style="dark" />
+        <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
         <Stack
           screenOptions={{
-            headerStyle: { backgroundColor: expiria.colors.primarySurface },
+            headerStyle: { backgroundColor: colors.primarySurface },
             headerTitleStyle: {
-              color: expiria.colors.primaryInk,
+              color: colors.primaryInk,
               fontWeight: expiria.typography.weights.semibold,
               fontSize: expiria.typography.sizes.subheading,
             },
-            headerTintColor: expiria.colors.primaryInk,
+            headerTintColor: colors.primaryInk,
             headerShadowVisible: false,
-            contentStyle: { backgroundColor: expiria.colors.primarySurface },
+            contentStyle: { backgroundColor: colors.primarySurface },
           }}
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -30,5 +34,13 @@ export default function RootLayout() {
         </Stack>
       </SafeAreaProvider>
     </TamaguiProvider>
+  )
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutInner />
+    </ThemeProvider>
   )
 }

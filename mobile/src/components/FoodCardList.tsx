@@ -4,6 +4,7 @@ import { FoodItemWithStatus } from '../types';
 import { FoodCard } from './FoodCard';
 import { EmptyState } from './EmptyState';
 import { expiria } from '../theme';
+import { useThemeColors } from '../context/ThemeContext';
 
 interface FoodCardListProps {
     items: FoodItemWithStatus[];
@@ -22,6 +23,8 @@ export function FoodCardList({
     refreshing = false,
     onAddItem,
 }: FoodCardListProps) {
+    const colors = useThemeColors();
+
     // Sort items by expiration date (soonest first)
     const sortedItems = useMemo(() => {
         return [...items].sort((a, b) => {
@@ -54,6 +57,7 @@ export function FoodCardList({
         () => (
             <EmptyState
                 icon="basket-outline"
+                illustration={require('../../assets/empty-fridge.png')}
                 title="No Food Items"
                 message="Start tracking your food by scanning a receipt or adding items manually."
                 actionLabel={onAddItem ? "Scan Receipt" : undefined}
@@ -64,7 +68,7 @@ export function FoodCardList({
     );
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.primarySurface }]}>
             <FlatList
                 data={sortedItems}
                 renderItem={renderItem}
@@ -79,8 +83,8 @@ export function FoodCardList({
                         <RefreshControl
                             refreshing={refreshing}
                             onRefresh={onRefresh}
-                            tintColor={expiria.colors.primaryInk}
-                            colors={[expiria.colors.primaryInk]}
+                            tintColor={colors.primaryInk}
+                            colors={[colors.primaryInk]}
                         />
                     ) : undefined
                 }
@@ -93,7 +97,6 @@ export function FoodCardList({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: expiria.colors.primarySurface,
     },
     listContent: {
         paddingVertical: expiria.spacing.sm,

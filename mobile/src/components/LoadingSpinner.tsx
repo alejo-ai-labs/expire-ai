@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
-import { expiria } from '../theme';
+import { useThemeColors } from '../context/ThemeContext';
 
 interface LoadingSpinnerProps {
     message?: string;
@@ -8,10 +8,12 @@ interface LoadingSpinnerProps {
 }
 
 export function LoadingSpinner({ message, size = 'large' }: LoadingSpinnerProps) {
+    const colors = useThemeColors();
+
     return (
         <View style={styles.container}>
-            <ActivityIndicator size={size} color={expiria.colors.primaryInk} />
-            {message && <Text style={styles.message}>{message}</Text>}
+            <ActivityIndicator size={size} color={colors.primaryInk} />
+            {message && <Text style={[styles.message, { color: colors.textMuted }]}>{message}</Text>}
         </View>
     );
 }
@@ -26,7 +28,6 @@ const styles = StyleSheet.create({
     message: {
         marginTop: 12,
         fontSize: 16,
-        color: expiria.colors.textMuted,
         textAlign: 'center',
     },
 });
